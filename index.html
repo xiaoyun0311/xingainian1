@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新概念英语·第一册 · 间隔重复复习</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f5f7fb; padding: 20px; color: #1e2a3a; }
+        .container { max-width: 820px; margin: 0 auto; }
+        h1 { text-align: center; font-weight: 600; font-size: 1.8rem; color: #0b2b4a; margin-bottom: 2px; }
+        .sub { text-align: center; color: #5e6f8d; margin-bottom: 18px; font-size: 0.9rem; }
+
+        .progress-save { background: #e8f0fe; border-radius: 30px; padding: 8px 18px; text-align: center; font-size: 0.85rem; color: #1a4b7a; margin-bottom: 14px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; align-items: center; }
+        .progress-save .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; }
+        .dot.green { background: #2b7a4b; }
+        .dot.orange { background: #e68a2e; }
+        .dot.gray { background: #9aa8b9; }
+        .save-status { font-weight: 500; }
+
+        .mode-tabs { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 16px; justify-content: center; }
+        .mode-tab { padding: 6px 14px; border-radius: 40px; background: #e9edf4; border: none; font-weight: 500; color: #2d4059; cursor: pointer; transition: 0.1s; font-size: 0.82rem; }
+        .mode-tab.active { background: #0b2b4a; color: white; }
+
+        .card { background: white; border-radius: 32px; padding: 24px 18px; box-shadow: 0 8px 28px rgba(0,20,50,0.08); margin-bottom: 16px; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 0.2s; }
+        .word-big { font-size: 2.4rem; font-weight: 600; letter-spacing: 0.5px; margin: 4px 0; }
+        .word-ipa { font-size: 1.2rem; color: #6f7d98; font-family: 'Georgia', 'Times New Roman', serif; margin: 2px 0 6px 0; letter-spacing: 0.5px; }
+        .word-zh { font-size: 1.8rem; font-weight: 500; color: #0b2b4a; }
+        .word-zh .pos { font-size: 1.0rem; font-weight: 400; color: #7a5a7a; background: #f0edf5; padding: 2px 12px; border-radius: 20px; margin-left: 8px; }
+        .word-en { font-size: 2.0rem; font-weight: 600; color: #0f3b5e; font-family: 'Georgia', serif; }
+        .hint { color: #6f7d98; font-size: 0.85rem; margin: 6px 0; }
+        .lesson-badge { background: #d4e0f0; padding: 2px 14px; border-radius: 30px; font-size: 0.75rem; font-weight: 600; color: #1a3b5a; display: inline-block; margin-bottom: 6px; }
+
+        .example-box { background: #f0f4fe; border-radius: 16px; padding: 12px 18px; margin: 10px 0 4px 0; max-width: 520px; width: 100%; border-left: 4px solid #3a7bb5; }
+        .example-en { font-size: 1.0rem; color: #0b2b4a; font-style: italic; }
+        .example-zh { font-size: 0.9rem; color: #4d627a; margin-top: 3px; }
+
+        .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; max-width: 460px; margin: 12px 0; }
+        .opt-btn { padding: 12px 8px; background: #f2f6fd; border: 1.5px solid #d7e0ed; border-radius: 60px; font-size: 0.95rem; font-weight: 500; color: #1a2d44; cursor: pointer; transition: 0.1s; }
+        .opt-btn:hover { background: #e6eefa; }
+        .opt-btn.correct { background: #c7e3c7; border-color: #2b7a4b; color: #0f4a2a; }
+        .opt-btn.wrong { background: #f8d7da; border-color: #b33c3c; color: #7a2a2a; }
+
+        .audio-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin: 8px 0; }
+        .audio-btn { background: #eef3fc; border: none; padding: 9px 20px; border-radius: 60px; font-size: 0.95rem; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: 0.1s; }
+        .audio-btn:hover { background: #dce6f5; }
+        .audio-btn.word { color: #0b4a7a; }
+        .audio-btn.example { color: #8a2e5a; }
+        .audio-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .input-area { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 12px 0; width: 100%; max-width: 420px; }
+        .input-area input { flex: 1; min-width: 140px; padding: 12px 16px; border-radius: 60px; border: 1.5px solid #cbd6e6; font-size: 0.95rem; outline: none; }
+        .input-area input:focus { border-color: #2d6b9e; box-shadow: 0 0 0 3px rgba(45,107,158,0.2); }
+        .input-area button { padding: 12px 24px; border-radius: 60px; border: none; background: #1a4b7a; color: white; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: 0.1s; }
+        .input-area button:hover { background: #0f3b62; }
+
+        .stat { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; background: white; padding: 10px 16px; border-radius: 60px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); margin: 12px 0; font-size: 0.85rem; }
+        .stat span { font-weight: 600; color: #0b2b4a; }
+
+        .action-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 12px 0; }
+        .action-btn { padding: 8px 18px; border-radius: 40px; border: 1px solid #c6d2e6; background: white; font-weight: 500; color: #1e3a5a; cursor: pointer; transition: 0.1s; font-size: 0.85rem; }
+        .action-btn:hover { background: #e9eff8; }
+        .action-btn.danger { border-color: #dba8a8; color: #8a3a3a; }
+        .action-btn.danger:hover { background: #fde8e8; }
+
+        .wordlist { background: white; border-radius: 24px; padding: 16px; margin-top: 20px; max-height: 320px; overflow-y: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .wordlist table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .wordlist td { padding: 4px 8px; border-bottom: 1px solid #eef2f8; }
+        .wordlist tr:last-child td { border: none; }
+        .wordlist .en { font-weight: 500; color: #0f3b5e; }
+        .wordlist .ipa { color: #7a5a7a; font-family: 'Georgia', serif; font-size: 0.8rem; padding: 0 6px; }
+        .wordlist .zh { color: #3d5470; }
+        .wordlist .lesson-tag { color: #5a6f8a; font-size: 0.7rem; background: #eef3fa; padding: 1px 8px; border-radius: 12px; margin-right: 4px; white-space: nowrap; }
+        .wordlist .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
+        .wordlist .status-dot.done { background: #2b7a4b; }
+        .wordlist .status-dot.pending { background: #c0c8d6; }
+        .wordlist .status-dot.learning { background: #e68a2e; }
+        .wordlist .status-dot.mastered { background: #1a6b3a; }
+
+        .voice-status { text-align: center; font-size: 0.8rem; color: #5e6f8d; margin-bottom: 10px; padding: 4px 12px; background: #f0f4fe; border-radius: 20px; display: inline-block; }
+        .voice-status.loading { color: #e68a2e; background: #fef7e0; }
+
+        @media (max-width: 500px) { .word-big { font-size: 1.8rem; } .options { grid-template-columns: 1fr; } }
+        .hidden { display: none !important; }
+        .mt-8 { margin-top: 6px; }
+        .small-ipa { font-size: 0.95rem; color: #7a5a7a; font-family: 'Georgia', serif; }
+        .pos-badge { font-size: 0.9rem; color: #7a5a7a; background: #f0edf5; padding: 2px 14px; border-radius: 20px; margin-left: 6px; font-weight: 400; }
+        .audio-pair { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 6px 0 4px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📘 新概念英语·第一册 · 间隔重复</h1>
+    <div class="sub">🎯 分课学习 · 自动保存进度 · 四次答对永久掌握</div>
+
+    <div style="text-align: center; margin-bottom: 10px;">
+        <span class="voice-status loading" id="voiceStatus">🔊 正在加载语音引擎...</span>
+    </div>
+
+    <div class="progress-save" id="progressBar">
+        <span><span class="dot green"></span> 已掌握: <span id="masteredCount">0</span> 词</span>
+        <span><span class="dot orange"></span> 学习中: <span id="learningCount">0</span> 词</span>
+        <span><span class="dot gray"></span> 待复习: <span id="unlearnedCount">0</span> 词</span>
+        <span class="save-status" id="saveStatus">💾 自动保存</span>
+    </div>
+
+    <div class="mode-tabs" id="modeTabs">
+        <button class="mode-tab active" data-mode="card">📖 单词卡</button>
+        <button class="mode-tab" data-mode="en2zh">📝 英文→中文</button>
+        <button class="mode-tab" data-mode="zh2en">🇨🇳 中文→英文</button>
+        <button class="mode-tab" data-mode="listen">🎧 听音拼写</button>
+        <button class="mode-tab" data-mode="audio2word">🔊 听音选词</button>
+    </div>
+
+    <div class="card" id="cardMain">
+        <div id="cardContent"></div>
+        <div id="extraArea"></div>
+    </div>
+
+    <div class="stat" id="statBar">
+        <span>✅ 正确: <span id="correctNum">0</span></span>
+        <span>❌ 错误: <span id="wrongNum">0</span></span>
+        <span>📊 正确率: <span id="rateNum">0%</span></span>
+        <span>📌 剩余: <span id="remainNum">0</span></span>
+    </div>
+
+    <div class="action-row">
+        <button class="action-btn" id="nextBtn">▶ 下一题</button>
+        <button class="action-btn" id="shuffleBtn">🔀 打乱</button>
+        <button class="action-btn danger" id="resetAllBtn">🗑️ 重置全部进度</button>
+    </div>
+
+    <div class="wordlist" id="wordlistContainer">
+        <div style="font-weight:600; margin-bottom:6px;">📚 完整词表 <span style="font-weight:400; color:#6f7d98; font-size:0.8rem;">（● 已掌握 · 🟠 学习中 · ○ 待复习）</span></div>
+        <div id="wordlistTable"></div>
+    </div>
+</div>
+
+<script>
+// ======================== 数据：新概念英语第一册（来自PDF） ========================
+const RAW_WORDS = [
+    // Lesson 1
+    { en: "I", ipa: "[ai]", zh: "我", lesson: "L1", pos: "pron.", example: "I am a student." },
+    { en: "am", ipa: "[m, æm]", zh: "be动词现在时第一人称单数", lesson: "L1", pos: "v.", example: "I am happy." },
+    { en: "are", ipa: "[a:]", zh: "be动词现在时复数", lesson: "L1", pos: "v.", example: "You are right." },
+    { en: "name", ipa: "['neim]", zh: "名字", lesson: "L1", pos: "n.", example: "My name is Tom." },
+    { en: "what", ipa: "[wɔt, wa:t]", zh: "什么", lesson: "L1", pos: "pron.", example: "What is this?" },
+    { en: "nationality", ipa: "[næʃə'næliti]", zh: "国籍", lesson: "L1", pos: "n.", example: "What is your nationality?" },
+    { en: "job", ipa: "[dʒɔb]", zh: "工作", lesson: "L1", pos: "n.", example: "I have a job." },
+    { en: "keyboard", ipa: "['ki:bɔ:d]", zh: "电脑键盘", lesson: "L1", pos: "n.", example: "The keyboard is new." },
+    { en: "operator", ipa: "['ɔpəreita]", zh: "操作人员", lesson: "L1", pos: "n.", example: "She is an operator." },
+    { en: "engineer", ipa: "[ˌendʒi'niə]", zh: "工程师", lesson: "L1", pos: "n.", example: "He is an engineer." },
+    // Lesson 7
+    { en: "tall", ipa: "[tɔ:l]", zh: "高的", lesson: "L7", pos: "adj.", example: "He is tall." },
+    { en: "short", ipa: "[ʃɔ:t]", zh: "矮的", lesson: "L7", pos: "adj.", example: "She is short." },
+    { en: "dirty", ipa: "['dɔ:t]", zh: "脏的", lesson: "L7", pos: "adj.", example: "The room is dirty." },
+    { en: "clean", ipa: "[kli:n]", zh: "干净的", lesson: "L7", pos: "adj.", example: "The room is clean." },
+    { en: "hot", ipa: "[hɔt]", zh: "热的", lesson: "L7", pos: "adj.", example: "The coffee is hot." },
+    { en: "cold", ipa: "[kəuld]", zh: "冷的", lesson: "L7", pos: "adj.", example: "The water is cold." },
+    { en: "old", ipa: "[əuld]", zh: "老的", lesson: "L7", pos: "adj.", example: "He is old." },
+    { en: "young", ipa: "[jɔŋ]", zh: "年轻的", lesson: "L7", pos: "adj.", example: "She is young." },
+    { en: "busy", ipa: "['bizi]", zh: "忙的", lesson: "L7", pos: "adj.", example: "I am busy." },
+    { en: "lazy", ipa: "['leizi]", zh: "懒的", lesson: "L7", pos: "adj.", example: "He is lazy." },
+    // Lesson 8
+    { en: "policeman", ipa: "[pə'li:smən]", zh: "警察", lesson: "L8", pos: "n.", example: "The policeman is tall." },
+    { en: "policewoman", ipa: "[pə'li:s,wumən]", zh: "女警察", lesson: "L8", pos: "n.", example: "She is a policewoman." },
+    { en: "taxi driver", ipa: "['tæksi 'draivə]", zh: "出租汽车司机", lesson: "L8", pos: "n.", example: "He is a taxi driver." },
+    { en: "air hostess", ipa: "[eə 'həustis]", zh: "空中小姐", lesson: "L8", pos: "n.", example: "She is an air hostess." },
+    { en: "postman", ipa: "['pəustmən]", zh: "邮递员", lesson: "L8", pos: "n.", example: "The postman comes early." },
+    { en: "nurse", ipa: "[nə:s]", zh: "护士", lesson: "L8", pos: "n.", example: "She is a nurse." },
+    { en: "mechanic", ipa: "[mi'kænik]", zh: "机械师", lesson: "L8", pos: "n.", example: "He is a mechanic." },
+    { en: "hairdresser", ipa: "['hə,dresə]", zh: "理发师", lesson: "L8", pos: "n.", example: "She is a hairdresser." },
+    { en: "housewife", ipa: "['hauswaiʃ]", zh: "家庭妇女", lesson: "L8", pos: "n.", example: "She is a housewife." },
+    { en: "milkman", ipa: "['milkman]", zh: "送牛奶的人", lesson: "L8", pos: "n.", example: "The milkman comes daily." },
+    // Lesson 9
+    { en: "hello", ipa: "[hə'laʊ]", zh: "喂（表示问候）", lesson: "L9", pos: "int.", example: "Hello, how are you?" },
+    { en: "hi", ipa: "[hai]", zh: "喂，嗨", lesson: "L9", pos: "int.", example: "Hi, Tom!" },
+    { en: "how", ipa: "[hau]", zh: "怎样", lesson: "L9", pos: "adv.", example: "How are you?" },
+    { en: "today", ipa: "[tə'dei]", zh: "今天", lesson: "L9", pos: "adv.", example: "Today is sunny." },
+    { en: "well", ipa: "[wel]", zh: "身体好", lesson: "L9", pos: "adj.", example: "I feel well." },
+    { en: "fine", ipa: "[fain]", zh: "美好的", lesson: "L9", pos: "adj.", example: "It's a fine day." },
+    { en: "thanks", ipa: "[θæŋks]", zh: "谢谢", lesson: "L9", pos: "int.", example: "Thanks a lot." },
+    { en: "goodbye", ipa: "[gud'bai]", zh: "再见", lesson: "L9", pos: "int.", example: "Goodbye, see you later." },
+    { en: "see", ipa: "[si:]", zh: "见", lesson: "L9", pos: "v.", example: "See you tomorrow." },
+    // Lesson 10
+    { en: "fat", ipa: "[fæt]", zh: "胖的", lesson: "L10", pos: "adj.", example: "The cat is fat." },
+    { en: "woman", ipa: "['wumən]", zh: "女人", lesson: "L10", pos: "n.", example: "The woman is tall." },
+    { en: "thin", ipa: "[θin]", zh: "瘦的", lesson: "L10", pos: "adj.", example: "She is thin." },
+    // Lesson 11
+    { en: "whose", ipa: "[hu:z]", zh: "谁的", lesson: "L11", pos: "pron.", example: "Whose book is this?" },
+    { en: "blue", ipa: "[blu:]", zh: "蓝色的", lesson: "L11", pos: "adj.", example: "The sky is blue." },
+    { en: "perhaps", ipa: "[pə'hæps]", zh: "大概", lesson: "L11", pos: "adv.", example: "Perhaps it will rain." },
+    { en: "white", ipa: "[wait]", zh: "白色的", lesson: "L11", pos: "adj.", example: "The paper is white." },
+    { en: "catch", ipa: "[kætʃ]", zh: "抓住", lesson: "L11", pos: "v.", example: "Catch the ball!" },
+    // Lesson 12
+    { en: "father", ipa: "['fɑ:ðə]", zh: "父亲", lesson: "L12", pos: "n.", example: "My father is kind." },
+    { en: "mother", ipa: "['mɔðə]", zh: "母亲", lesson: "L12", pos: "n.", example: "My mother is a teacher." },
+    { en: "blouse", ipa: "[blauz]", zh: "女衬衫", lesson: "L12", pos: "n.", example: "She wears a blouse." },
+    { en: "sister", ipa: "['sistə]", zh: "姐，妹", lesson: "L12", pos: "n.", example: "My sister is younger." },
+    { en: "tie", ipa: "[tai]", zh: "领带", lesson: "L12", pos: "n.", example: "He wears a tie." },
+    { en: "brother", ipa: "['brɔðə]", zh: "兄，弟", lesson: "L12", pos: "n.", example: "My brother is older." },
+    { en: "his", ipa: "[hiz]", zh: "他的", lesson: "L12", pos: "pron.", example: "This is his book." },
+    { en: "her", ipa: "[hə:]", zh: "她的", lesson: "L12", pos: "pron.", example: "This is her pen." },
+    // Lesson 13
+    { en: "colour", ipa: "['kɔlə]", zh: "颜色", lesson: "L13", pos: "n.", example: "What colour is it?" },
+    { en: "green", ipa: "[ɡri:n]", zh: "绿色", lesson: "L13", pos: "adj.", example: "The tree is green." },
+    { en: "come", ipa: "[kəm]", zh: "来", lesson: "L13", pos: "v.", example: "Come here, please." },
+    { en: "upstairs", ipa: "[ˌʌp'steəz]", zh: "楼上", lesson: "L13", pos: "adv.", example: "He went upstairs." },
+    { en: "smart", ipa: "[smɑ:t]", zh: "时髦的，巧妙的", lesson: "L13", pos: "adj.", example: "She looks smart." },
+    { en: "hat", ipa: "[hæt]", zh: "帽子", lesson: "L13", pos: "n.", example: "She wears a hat." },
+    { en: "same", ipa: "[seim]", zh: "相同的", lesson: "L13", pos: "adj.", example: "We have the same book." },
+    { en: "lovely", ipa: "['lɔvli]", zh: "可爱的，秀丽的", lesson: "L13", pos: "adj.", example: "What a lovely day!" },
+    // Lesson 14
+    { en: "case", ipa: "[keis]", zh: "箱子", lesson: "L14", pos: "n.", example: "The case is heavy." },
+    { en: "carpet", ipa: "['ko:pit]", zh: "地毯", lesson: "L14", pos: "n.", example: "The carpet is clean." },
+    { en: "dog", ipa: "[dɔg]", zh: "狗", lesson: "L14", pos: "n.", example: "The dog is friendly." },
+    // Lesson 15
+    { en: "Customs", ipa: "['kʌstəmz]", zh: "海关", lesson: "L15", pos: "n.", example: "Pass through Customs." },
+    { en: "officer", ipa: "['ɔfisə]", zh: "官员", lesson: "L15", pos: "n.", example: "He is a police officer." },
+    { en: "girl", ipa: "[gə:l]", zh: "女孩，姑娘", lesson: "L15", pos: "n.", example: "The girl is pretty." },
+    { en: "Danish", ipa: "['deini]", zh: "丹麦人", lesson: "L15", pos: "n.", example: "He is Danish." },
+    { en: "friend", ipa: "[frend]", zh: "朋友", lesson: "L15", pos: "n.", example: "She is my friend." },
+    { en: "Norwegian", ipa: "[nɔ:'wi:dʒən]", zh: "挪威人", lesson: "L15", pos: "n.", example: "She is Norwegian." },
+    { en: "passport", ipa: "['pa:spɔ:t]", zh: "护照", lesson: "L15", pos: "n.", example: "Show your passport." },
+    { en: "brown", ipa: "[braun]", zh: "棕色的", lesson: "L15", pos: "adj.", example: "The table is brown." },
+    { en: "tourist", ipa: "['tuərist]", zh: "旅游者", lesson: "L15", pos: "n.", example: "The tourist is from Italy." },
+    // Lesson 16
+    { en: "Russian", ipa: "['rʌʃən]", zh: "俄罗斯人", lesson: "L16", pos: "n.", example: "He is Russian." },
+    { en: "Dutch", ipa: "[dʌtʃ]", zh: "荷兰人", lesson: "L16", pos: "n.", example: "She is Dutch." },
+    { en: "these", ipa: "[ði:z]", zh: "这些", lesson: "L16", pos: "pron.", example: "These are my books." },
+    { en: "red", ipa: "[red]", zh: "红色的", lesson: "L16", pos: "adj.", example: "The apple is red." },
+    { en: "grey", ipa: "[grei]", zh: "灰色的", lesson: "L16", pos: "adj.", example: "The sky is grey." },
+    { en: "yellow", ipa: "['jeləu]", zh: "黄色的", lesson: "L16", pos: "adj.", example: "The sun is yellow." },
+    { en: "black", ipa: "[blæk]", zh: "黑色的", lesson: "L16", pos: "adj.", example: "The car is black." },
+    { en: "orange", ipa: "['ɔrindʒ]", zh: "橘黄色的", lesson: "L16", pos: "adj.", example: "The orange is orange." },
+    // Lesson 17
+    { en: "employee", ipa: "[im'plɔi-i:]", zh: "雇员", lesson: "L17", pos: "n.", example: "He is an employee." },
+    { en: "hard-working", ipa: "['ha:dwa:kiŋ]", zh: "勤奋的", lesson: "L17", pos: "adj.", example: "She is hard-working." },
+    { en: "sales reps", ipa: "[seilz reps]", zh: "推销员", lesson: "L17", pos: "n.", example: "They are sales reps." },
+    { en: "man", ipa: "[mæn]", zh: "男人", lesson: "L17", pos: "n.", example: "The man is tall." },
+    { en: "office", ipa: "['ɔfis]", zh: "办公室", lesson: "L17", pos: "n.", example: "He works in an office." },
+    { en: "assistant", ipa: "[ə'sistənt]", zh: "助手", lesson: "L17", pos: "n.", example: "She is an assistant." },
+    // Lesson 19
+    { en: "matter", ipa: "['mætə]", zh: "事情", lesson: "L19", pos: "n.", example: "What's the matter?" },
+    { en: "children", ipa: "['tʃildrən]", zh: "孩子们", lesson: "L19", pos: "n.", example: "The children are playing." },
+    { en: "tired", ipa: "['taiəd]", zh: "累，疲乏", lesson: "L19", pos: "adj.", example: "I am tired." },
+    { en: "boy", ipa: "[bɔi]", zh: "男孩", lesson: "L19", pos: "n.", example: "The boy is happy." },
+    { en: "thirsty", ipa: "['θə:sti]", zh: "渴", lesson: "L19", pos: "adj.", example: "I am thirsty." },
+    { en: "mum", ipa: "[mʌm]", zh: "妈妈（儿语）", lesson: "L19", pos: "n.", example: "Mum, I am home." },
+    { en: "sit down", ipa: "[sit daun]", zh: "坐下", lesson: "L19", pos: "v.", example: "Please sit down." },
+    { en: "right", ipa: "[rait]", zh: "好，可以", lesson: "L19", pos: "adj.", example: "All right." },
+    { en: "ice cream", ipa: "[ais kri:m]", zh: "冰淇淋", lesson: "L19", pos: "n.", example: "I like ice cream." },
+    // Lesson 20
+    { en: "big", ipa: "[big]", zh: "大的", lesson: "L20", pos: "adj.", example: "The house is big." },
+    { en: "small", ipa: "[smɔ:l]", zh: "小的", lesson: "L20", pos: "adj.", example: "The car is small." },
+    { en: "open", ipa: "['əupən]", zh: "开着的", lesson: "L20", pos: "adj.", example: "The door is open." },
+    { en: "shut", ipa: "[ʃʌt]", zh: "关着的", lesson: "L20", pos: "adj.", example: "The window is shut." },
+    { en: "light", ipa: "[lait]", zh: "轻的", lesson: "L20", pos: "adj.", example: "The bag is light." },
+    { en: "heavy", ipa: "['hevi]", zh: "重的", lesson: "L20", pos: "adj.", example: "The box is heavy." },
+    { en: "long", ipa: "[lɔŋ]", zh: "长的", lesson: "L20", pos: "adj.", example: "The road is long." },
+    { en: "shoe", ipa: "[ʃu:]", zh: "鞋子", lesson: "L20", pos: "n.", example: "My shoe is new." },
+    { en: "grandfather", ipa: "['grænd,fɑ:ðə]", zh: "祖父，外祖父", lesson: "L20", pos: "n.", example: "My grandfather is old." },
+    { en: "grandmother", ipa: "['grænd,mʌðə]", zh: "祖母，外祖母", lesson: "L20", pos: "n.", example: "My grandmother is kind." },
+    // Lesson 21
+    { en: "give", ipa: "[giv]", zh: "给", lesson: "L21", pos: "v.", example: "Give me the book." },
+    { en: "one", ipa: "[wʌn]", zh: "一个", lesson: "L21", pos: "pron.", example: "I have one." },
+    { en: "which", ipa: "[witʃ]", zh: "哪一个", lesson: "L21", pos: "pron.", example: "Which one do you want?" },
+    // Lesson 22
+    { en: "empty", ipa: "['empti]", zh: "空的", lesson: "L22", pos: "adj.", example: "The box is empty." },
+    { en: "full", ipa: "[ful]", zh: "满的", lesson: "L22", pos: "adj.", example: "The glass is full." },
+    { en: "large", ipa: "[lɑ:dʒ]", zh: "大的", lesson: "L22", pos: "adj.", example: "The house is large." },
+    { en: "little", ipa: "['litl]", zh: "小的", lesson: "L22", pos: "adj.", example: "The puppy is little." },
+    { en: "sharp", ipa: "[ʃɑ:p]", zh: "尖的，锋利的", lesson: "L22", pos: "adj.", example: "The knife is sharp." },
+    { en: "blunt", ipa: "[blʌnt]", zh: "钝的", lesson: "L22", pos: "adj.", example: "The pencil is blunt." },
+    { en: "box", ipa: "[bɔks]", zh: "盒子，箱子", lesson: "L22", pos: "n.", example: "The box is heavy." },
+    { en: "glass", ipa: "[glɑ:s]", zh: "杯子", lesson: "L22", pos: "n.", example: "The glass is empty." },
+    { en: "cup", ipa: "[kʌp]", zh: "茶杯", lesson: "L22", pos: "n.", example: "This is a cup." },
+    { en: "bottle", ipa: "['bɔtl]", zh: "瓶子", lesson: "L22", pos: "n.", example: "The bottle is full." },
+    { en: "tin", ipa: "[tin]", zh: "罐头", lesson: "L22", pos: "n.", example: "The tin is open." },
+    { en: "knife", ipa: "[naif]", zh: "刀子", lesson: "L22", pos: "n.", example: "The knife is sharp." },
+    { en: "fork", ipa: "[fɔ:k]", zh: "叉子", lesson: "L22", pos: "n.", example: "Use a fork." },
+    // Lesson 23
+    { en: "on", ipa: "[ɔn]", zh: "在...之上", lesson: "L23", pos: "prep.", example: "The book is on the table." },
+    { en: "shelf", ipa: "[ʃelf]", zh: "架子，搁板", lesson: "L23", pos: "n.", example: "The book is on the shelf." },
+    // Lesson 24
+    { en: "desk", ipa: "[desk]", zh: "课桌", lesson: "L24", pos: "n.", example: "The desk is clean." },
+    { en: "table", ipa: "['teibl]", zh: "桌子", lesson: "L24", pos: "n.", example: "The table is big." },
+    { en: "plate", ipa: "[pleit]", zh: "盘子", lesson: "L24", pos: "n.", example: "The plate is empty." },
+    { en: "cupboard", ipa: "['kʌbəd]", zh: "食橱", lesson: "L24", pos: "n.", example: "The cupboard is open." },
+    { en: "cigarette", ipa: "[ˌsigə'ret]", zh: "香烟", lesson: "L24", pos: "n.", example: "He smokes a cigarette." },
+    { en: "television", ipa: "['teli,viʒən]", zh: "电视机", lesson: "L24", pos: "n.", example: "The television is on." },
+    { en: "floor", ipa: "[flɔ:]", zh: "地板", lesson: "L24", pos: "n.", example: "The floor is clean." },
+    { en: "dressing table", ipa: "['dresiŋ 'teibl]", zh: "梳妆台", lesson: "L24", pos: "n.", example: "The dressing table is in the bedroom." },
+    { en: "magazine", ipa: "[ˌmægə'zi:n]", zh: "杂志", lesson: "L24", pos: "n.", example: "I read a magazine." },
+    { en: "bed", ipa: "[bed]", zh: "床", lesson: "L24", pos: "n.", example: "The bed is comfortable." },
+    { en: "newspaper", ipa: "['nju:s,peipə]", zh: "报纸", lesson: "L24", pos: "n.", example: "I read the newspaper." },
+    { en: "stereo", ipa: "['steriəu]", zh: "立体声音响", lesson: "L24", pos: "n.", example: "The stereo is loud." },
+    // Lesson 25
+    { en: "Mrs.", ipa: "['misiz]", zh: "夫人", lesson: "L25", pos: "n.", example: "Mrs. Smith is kind." },
+    { en: "kitchen", ipa: "['kitʃin]", zh: "厨房", lesson: "L25", pos: "n.", example: "She is in the kitchen." },
+    { en: "refrigerator", ipa: "[ri'fridʒəreitə]", zh: "电冰箱", lesson: "L25", pos: "n.", example: "The refrigerator is cold." },
+    { en: "right", ipa: "[rait]", zh: "右边", lesson: "L25", pos: "n.", example: "Turn right." },
+    { en: "electric", ipa: "[i'lektrik]", zh: "带电的，可通电的", lesson: "L25", pos: "adj.", example: "It is electric." },
+    { en: "left", ipa: "[left]", zh: "左边", lesson: "L25", pos: "n.", example: "Turn left." },
+    { en: "cooker", ipa: "['kukə]", zh: "炉子，炊具", lesson: "L25", pos: "n.", example: "The cooker is new." },
+    { en: "middle", ipa: "['midl]", zh: "中间", lesson: "L25", pos: "n.", example: "He is in the middle." },
+    { en: "of", ipa: "[ɔv]", zh: "(属于)…的", lesson: "L25", pos: "prep.", example: "The cover of the book." },
+    { en: "room", ipa: "[ru:m]", zh: "房间", lesson: "L25", pos: "n.", example: "The room is bright." },
+    // Lesson 26
+    { en: "where", ipa: "[weə]", zh: "在哪里", lesson: "L26", pos: "adv.", example: "Where is my book?" },
+    { en: "in", ipa: "[in]", zh: "在…里", lesson: "L26", pos: "prep.", example: "The book is in the bag." },
+    // Lesson 27
+    { en: "living room", ipa: "['liviŋ ru:m]", zh: "客厅", lesson: "L27", pos: "n.", example: "We watch TV in the living room." },
+    // Lesson 28
+    { en: "trousers", ipa: "['trauzəz]", zh: "(复数)长裤", lesson: "L28", pos: "n.", example: "He wears trousers." },
+    // Lesson 29
+    { en: "shut", ipa: "[ʃʌt]", zh: "关门", lesson: "L29", pos: "v.", example: "Shut the door." },
+    { en: "bedroom", ipa: "['bedrum]", zh: "卧室", lesson: "L29", pos: "n.", example: "This is my bedroom." },
+    { en: "untidy", ipa: "[ʌn'taidi]", zh: "乱，不整齐", lesson: "L29", pos: "adj.", example: "The room is untidy." },
+    { en: "must", ipa: "[mʌst]", zh: "必须，应该", lesson: "L29", pos: "aux.", example: "You must go." },
+    { en: "open", ipa: "['əupən]", zh: "打开", lesson: "L29", pos: "v.", example: "Open the door." },
+    { en: "air", ipa: "[eə]", zh: "使…通风", lesson: "L29", pos: "v.", example: "Air the room." },
+    { en: "put", ipa: "[put]", zh: "放置", lesson: "L29", pos: "v.", example: "Put the book on the shelf." },
+    { en: "clothes", ipa: "[kləuðz]", zh: "衣服", lesson: "L29", pos: "n.", example: "Put on your clothes." },
+    { en: "wardrobe", ipa: "['wɔ:drəub]", zh: "大衣柜", lesson: "L29", pos: "n.", example: "The clothes are in the wardrobe." },
+    { en: "dust", ipa: "[dʌst]", zh: "掸掉灰尘", lesson: "L29", pos: "v.", example: "Dust the furniture." },
+    { en: "sweep", ipa: "[swi:p]", zh: "扫", lesson: "L29", pos: "v.", example: "Sweep the floor." },
+    // Lesson 30
+    { en: "empty", ipa: "['empti]", zh: "倒空", lesson: "L30", pos: "v.", example: "Empty the box." },
+    { en: "read", ipa: "[ri:d]", zh: "读", lesson: "L30", pos: "v.", example: "Read the book." },
+    { en: "sharpen", ipa: "['ʃɑ:pən]", zh: "削尖，使锋利", lesson: "L30", pos: "v.", example: "Sharpen the pencil." },
+    { en: "put on", ipa: "[put ɔn]", zh: "穿上", lesson: "L30", pos: "v.", example: "Put on your coat." },
+    { en: "take off", ipa: "[teik ɔf]", zh: "脱掉", lesson: "L30", pos: "v.", example: "Take off your hat." },
+    { en: "turn on", ipa: "[tə:n ɔn]", zh: "开(电灯)", lesson: "L30", pos: "v.", example: "Turn on the light." },
+    { en: "turn off", ipa: "[tə:n ɔf]", zh: "关(电灯)", lesson: "L30", pos: "v.", example: "Turn off the light." },
+    // Lesson 31
+    { en: "garden", ipa: "['gɑ:dn]", zh: "花园", lesson: "L31", pos: "n.", example: "The garden is beautiful." },
+    { en: "under", ipa: "['ʌndə]", zh: "在…之下", lesson: "L31", pos: "prep.", example: "The cat is under the table." },
+    { en: "tree", ipa: "[tri:]", zh: "树", lesson: "L31", pos: "n.", example: "The tree is tall." },
+    { en: "climb", ipa: "[klaim]", zh: "爬，攀登", lesson: "L31", pos: "v.", example: "Climb the tree." },
+    { en: "who", ipa: "[hu:]", zh: "谁", lesson: "L31", pos: "pron.", example: "Who is that?" },
+    { en: "run", ipa: "[rʌn]", zh: "跑", lesson: "L31", pos: "v.", example: "Run fast." },
+    { en: "grass", ipa: "[grɑ:s]", zh: "草，草地", lesson: "L31", pos: "n.", example: "The grass is green." },
+    { en: "after", ipa: "['ɑ:ftə]", zh: "在…之后", lesson: "L31", pos: "prep.", example: "After school." },
+    { en: "cat", ipa: "[kæt]", zh: "猫", lesson: "L31", pos: "n.", example: "The cat is sleeping." },
+    // Lesson 32
+    { en: "type", ipa: "[taip]", zh: "打字", lesson: "L32", pos: "v.", example: "Type the letter." },
+    { en: "letter", ipa: "['letə]", zh: "信", lesson: "L32", pos: "n.", example: "Write a letter." },
+    { en: "basket", ipa: "['bɑ:skit]", zh: "篮子", lesson: "L32", pos: "n.", example: "Put the apples in the basket." },
+    { en: "eat", ipa: "[i:t]", zh: "吃", lesson: "L32", pos: "v.", example: "Eat your breakfast." },
+    { en: "bone", ipa: "[bəun]", zh: "骨头", lesson: "L32", pos: "n.", example: "The dog has a bone." },
+    { en: "clean", ipa: "[kli:n]", zh: "清洗", lesson: "L32", pos: "v.", example: "Clean the room." },
+    { en: "tooth", ipa: "[tu:θ]", zh: "牙齿", lesson: "L32", pos: "n.", example: "Brush your teeth." },
+    { en: "cook", ipa: "[kuk]", zh: "做(饭菜)", lesson: "L32", pos: "v.", example: "Cook dinner." },
+    { en: "milk", ipa: "[milk]", zh: "牛奶", lesson: "L32", pos: "n.", example: "Drink milk." },
+    { en: "meal", ipa: "[mi:l]", zh: "饭，一顿饭", lesson: "L32", pos: "n.", example: "Have a meal." },
+    { en: "drink", ipa: "[driŋk]", zh: "喝", lesson: "L32", pos: "v.", example: "Drink water." },
+    { en: "tap", ipa: "[tæp]", zh: "(水)龙头", lesson: "L32", pos: "n.", example: "Turn on the tap." },
+    // Lesson 33
+    { en: "day", ipa: "[dei]", zh: "日子", lesson: "L33", pos: "n.", example: "Have a nice day." },
+    { en: "cloud", ipa: "[klaud]", zh: "云", lesson: "L33", pos: "n.", example: "The cloud is white." },
+    { en: "sky", ipa: "[skai]", zh: "天空", lesson: "L33", pos: "n.", example: "The sky is blue." },
+    { en: "sun", ipa: "[sʌn]", zh: "太阳", lesson: "L33", pos: "n.", example: "The sun is shining." },
+    { en: "shine", ipa: "[ʃain]", zh: "照耀", lesson: "L33", pos: "v.", example: "The sun shines." },
+    { en: "with", ipa: "[wið]", zh: "和…在一起", lesson: "L33", pos: "prep.", example: "Go with me." },
+    { en: "family", ipa: "['fæməli]", zh: "家庭(成员)", lesson: "L33", pos: "n.", example: "My family is large." },
+    { en: "walk", ipa: "[wɔ:k]", zh: "走路，步行", lesson: "L33", pos: "v.", example: "Walk to school." },
+    { en: "over", ipa: "['əuvə]", zh: "跨越，在…之上", lesson: "L33", pos: "prep.", example: "Jump over the fence." },
+    { en: "bridge", ipa: "[bridʒ]", zh: "桥", lesson: "L33", pos: "n.", example: "Cross the bridge." },
+    { en: "boat", ipa: "[bəut]", zh: "船", lesson: "L33", pos: "n.", example: "The boat is on the river." },
+    { en: "river", ipa: "['rivə]", zh: "河", lesson: "L33", pos: "n.", example: "The river is wide." },
+    { en: "ship", ipa: "[ʃip]", zh: "轮船", lesson: "L33", pos: "n.", example: "The ship is huge." },
+    { en: "aeroplane", ipa: "['eərəplein]", zh: "飞机", lesson: "L33", pos: "n.", example: "The aeroplane is flying." },
+    { en: "fly", ipa: "[flai]", zh: "飞", lesson: "L33", pos: "v.", example: "Birds fly." },
+    // Lesson 34
+    { en: "sleep", ipa: "[sli:p]", zh: "睡觉", lesson: "L34", pos: "v.", example: "Sleep well." },
+    { en: "shave", ipa: "[ʃeiv]", zh: "刮脸", lesson: "L34", pos: "v.", example: "Shave your beard." },
+    { en: "cry", ipa: "[krai]", zh: "哭，喊", lesson: "L34", pos: "v.", example: "Don't cry." },
+    { en: "wash", ipa: "[wɔʃ]", zh: "洗", lesson: "L34", pos: "v.", example: "Wash your hands." },
+    { en: "wait", ipa: "[weit]", zh: "等", lesson: "L34", pos: "v.", example: "Wait for me." },
+    { en: "jump", ipa: "[dʒʌmp]", zh: "跳", lesson: "L34", pos: "v.", example: "Jump high." },
+    // Lesson 35
+    { en: "photograph", ipa: "['fəutəgrɑ:f]", zh: "照片", lesson: "L35", pos: "n.", example: "Take a photograph." },
+    { en: "village", ipa: "['vilidʒ]", zh: "村庄", lesson: "L35", pos: "n.", example: "The village is small." },
+    { en: "valley", ipa: "['væli]", zh: "山谷", lesson: "L35", pos: "n.", example: "The valley is beautiful." },
+    { en: "between", ipa: "[bi'twi:n]", zh: "在…之间", lesson: "L35", pos: "prep.", example: "Between the buildings." },
+    { en: "hill", ipa: "[hil]", zh: "小山", lesson: "L35", pos: "n.", example: "Walk up the hill." },
+    { en: "another", ipa: "[ə'nʌðə]", zh: "另一个", lesson: "L35", pos: "adj.", example: "Another cup of tea." },
+    { en: "wife", ipa: "[waif]", zh: "妻子", lesson: "L35", pos: "n.", example: "My wife is a teacher." },
+    { en: "along", ipa: "[ə'lɔŋ]", zh: "沿着", lesson: "L35", pos: "prep.", example: "Walk along the street." },
+    { en: "bank", ipa: "[bæŋk]", zh: "河岸", lesson: "L35", pos: "n.", example: "The bank of the river." },
+    { en: "water", ipa: "['wɔ:tə]", zh: "水", lesson: "L35", pos: "n.", example: "Drink water." },
+    { en: "swim", ipa: "[swim]", zh: "游泳", lesson: "L35", pos: "v.", example: "Swim in the pool." },
+    { en: "across", ipa: "[ə'krɔs]", zh: "横过", lesson: "L35", pos: "prep.", example: "Walk across the street." },
+    { en: "building", ipa: "['bildiŋ]", zh: "大楼，建筑物", lesson: "L35", pos: "n.", example: "The building is tall." },
+    { en: "park", ipa: "[pɑ:k]", zh: "公园", lesson: "L35", pos: "n.", example: "Go to the park." },
+    { en: "into", ipa: "['intu]", zh: "进入", lesson: "L35", pos: "prep.", example: "Go into the room." },
+    // Lesson 36
+    { en: "beside", ipa: "[bi'said]", zh: "在…旁", lesson: "L36", pos: "prep.", example: "Sit beside me." },
+    { en: "off", ipa: "[ɔf]", zh: "离开", lesson: "L36", pos: "prep.", example: "Get off the bus." },
+    // Lesson 37
+    { en: "work", ipa: "[wə:k]", zh: "工作", lesson: "L37", pos: "v.", example: "Work hard." },
+    { en: "hard", ipa: "['hɑ:d]", zh: "努力地", lesson: "L37", pos: "adv.", example: "Study hard." },
+    { en: "make", ipa: "[meik]", zh: "做", lesson: "L37", pos: "v.", example: "Make a cake." },
+    { en: "bookcase", ipa: "['buk-keis]", zh: "书橱，书架", lesson: "L37", pos: "n.", example: "Put the books on the bookcase." },
+    { en: "hammer", ipa: "['hæmə]", zh: "锤子", lesson: "L37", pos: "n.", example: "Use a hammer." },
+    { en: "paint", ipa: "[peint]", zh: "上漆，涂", lesson: "L37", pos: "v.", example: "Paint the wall." },
+    { en: "pink", ipa: "[piŋk]", zh: "粉红色", lesson: "L37", pos: "n.", example: "She likes pink." },
+    { en: "favourite", ipa: "['feivərit]", zh: "最喜欢的", lesson: "L37", pos: "adj.", example: "My favourite colour is blue." },
+    // Lesson 38
+    { en: "homework", ipa: "['həumwə:k]", zh: "作业", lesson: "L38", pos: "n.", example: "Do your homework." },
+    { en: "listen", ipa: "['lisən]", zh: "听", lesson: "L38", pos: "v.", example: "Listen to the music." },
+    { en: "dish", ipa: "[diʃ]", zh: "盘子，碟子", lesson: "L38", pos: "n.", example: "Wash the dishes." },
+    // Lesson 39
+    { en: "front", ipa: "[frʌnt]", zh: "前面", lesson: "L39", pos: "n.", example: "The front of the house." },
+    { en: "careful", ipa: "['keəful]", zh: "小心的，仔细的", lesson: "L39", pos: "adj.", example: "Be careful." },
+    { en: "vase", ipa: "[vɑ:z]", zh: "花瓶", lesson: "L39", pos: "n.", example: "The vase is beautiful." },
+    { en: "drop", ipa: "[drɔp]", zh: "掉下", lesson: "L39", pos: "v.", example: "Don't drop the glass." },
+    { en: "flower", ipa: "['flauə]", zh: "花", lesson: "L39", pos: "n.", example: "The flower is red." },
+    // Lesson 40
+    { en: "show", ipa: "[ʃəu]", zh: "给…看", lesson: "L40", pos: "v.", example: "Show me your book." },
+    { en: "send", ipa: "[send]", zh: "送给", lesson: "L40", pos: "v.", example: "Send a letter." },
+    { en: "take", ipa: "[teik]", zh: "带给", lesson: "L40", pos: "v.", example: "Take the book to her." },
+    // Lesson 41
+    { en: "cheese", ipa: "[tʃi:z]", zh: "乳酪，干酪", lesson: "L41", pos: "n.", example: "I like cheese." },
+    { en: "bread", ipa: "[bred]", zh: "面包", lesson: "L41", pos: "n.", example: "Eat bread." },
+    { en: "soap", ipa: "[səup]", zh: "肥皂", lesson: "L41", pos: "n.", example: "Wash with soap." },
+    { en: "chocolate", ipa: "['tʃɔklit]", zh: "巧克力", lesson: "L41", pos: "n.", example: "I like chocolate." },
+    { en: "sugar", ipa: "['ʃugə]", zh: "糖", lesson: "L41", pos: "n.", example: "Add sugar to the tea." },
+    { en: "coffee", ipa: "['kɔfi]", zh: "咖啡", lesson: "L41", pos: "n.", example: "Drink coffee." },
+    { en: "tea", ipa: "[ti:]", zh: "茶", lesson: "L41", pos: "n.", example: "Have a cup of tea." },
+    { en: "tobacco", ipa: "[tə'bækəu]", zh: "烟草，烟丝", lesson: "L41", pos: "n.", example: "Tobacco is harmful." },
+    // Lesson 42
+    { en: "bird", ipa: "[bə:d]", zh: "鸟", lesson: "L42", pos: "n.", example: "The bird is singing." },
+    { en: "any", ipa: "['eni]", zh: "一些", lesson: "L42", pos: "det.", example: "Do you have any questions?" },
+    { en: "some", ipa: "[sʌm]", zh: "一些", lesson: "L42", pos: "det.", example: "I have some apples." },
+    // Lesson 43
+    { en: "of course", ipa: "[əv kɔ:s]", zh: "当然", lesson: "L43", pos: "phrase", example: "Of course I can." },
+    { en: "kettle", ipa: "['ketl]", zh: "水壶", lesson: "L43", pos: "n.", example: "The kettle is boiling." },
+    { en: "behind", ipa: "[bi'haind]", zh: "在…后面", lesson: "L43", pos: "prep.", example: "Behind the door." },
+    { en: "teapot", ipa: "['ti:pɔt]", zh: "茶壶", lesson: "L43", pos: "n.", example: "Tea in the teapot." },
+    { en: "now", ipa: "[nau]", zh: "现在，此刻", lesson: "L43", pos: "adv.", example: "Now is the time." },
+    { en: "find", ipa: "[faind]", zh: "找到", lesson: "L43", pos: "v.", example: "Find the book." },
+    { en: "boil", ipa: "[bɔil]", zh: "沸腾，开", lesson: "L43", pos: "v.", example: "Boil the water." },
+    // Lesson 45
+    { en: "can", ipa: "[kæn]", zh: "能够", lesson: "L45", pos: "aux.", example: "I can swim." },
+    { en: "boss", ipa: "[bɔs]", zh: "老板，上司", lesson: "L45", pos: "n.", example: "My boss is nice." },
+    { en: "minute", ipa: "['minit]", zh: "分（钟）", lesson: "L45", pos: "n.", example: "Wait a minute." },
+    { en: "ask", ipa: "[ɑ:sk]", zh: "请求，要求", lesson: "L45", pos: "v.", example: "Ask a question." },
+    { en: "handwriting", ipa: "['hænd,raitiŋ]", zh: "书写", lesson: "L45", pos: "n.", example: "Your handwriting is good." },
+    { en: "terrible", ipa: "['terəbəl]", zh: "糟糕的，可怕的", lesson: "L45", pos: "adj.", example: "The weather is terrible." },
+    // Lesson 46
+    { en: "lift", ipa: "[lift]", zh: "拿起，搬起，举起", lesson: "L46", pos: "v.", example: "Lift the box." },
+    { en: "cake", ipa: "[keik]", zh: "饼，蛋糕", lesson: "L46", pos: "n.", example: "Have a cake." },
+    { en: "biscuit", ipa: "['biskit]", zh: "饼干", lesson: "L46", pos: "n.", example: "Eat a biscuit." },
+    // Lesson 47
+    { en: "like", ipa: "[laik]", zh: "喜欢，想要", lesson: "L47", pos: "v.", example: "I like coffee." },
+    { en: "want", ipa: "[wɔnt]", zh: "想", lesson: "L47", pos: "v.", example: "I want water." },
+    // Lesson 48
+    { en: "fresh", ipa: "[freʃ]", zh: "新鲜的", lesson: "L48", pos: "adj.", example: "Fresh fruit." },
+    { en: "egg", ipa: "[eg]", zh: "鸡蛋", lesson: "L48", pos: "n.", example: "Have an egg." },
+    { en: "butter", ipa: "['bʌtə]", zh: "黄油", lesson: "L48", pos: "n.", example: "Butter on bread." },
+    { en: "pure", ipa: "[pjuə]", zh: "纯净的", lesson: "L48", pos: "adj.", example: "Pure water." },
+    { en: "honey", ipa: "['hʌni]", zh: "蜂蜜", lesson: "L48", pos: "n.", example: "Honey is sweet." },
+    { en: "ripe", ipa: "[raip]", zh: "成熟的", lesson: "L48", pos: "adj.", example: "Ripe apples." },
+    { en: "banana", ipa: "[bə'nɑ:nə]", zh: "香蕉", lesson: "L48", pos: "n.", example: "Eat a banana." },
+    { en: "jam", ipa: "[dʒæm]", zh: "果酱", lesson: "L48", pos: "n.", example: "Jam on bread." },
+    { en: "sweet", ipa: "[swi:t]", zh: "甜的", lesson: "L48", pos: "adj.", example: "Sweet tea." },
+    { en: "orange", ipa: "['ɔrindʒ]", zh: "橙", lesson: "L48", pos: "n.", example: "An orange." },
+    { en: "Scotch whisky", ipa: "[skɔtʃ 'wiski]", zh: "苏格兰威士忌", lesson: "L48", pos: "n.", example: "Scotch whisky is strong." },
+    { en: "choice", ipa: "[tʃɔis]", zh: "上等的，精选的", lesson: "L48", pos: "adj.", example: "Choice fruit." },
+    { en: "apple", ipa: "['æpəl]", zh: "苹果", lesson: "L48", pos: "n.", example: "An apple a day." },
+    { en: "wine", ipa: "[wain]", zh: "酒，果酒", lesson: "L48", pos: "n.", example: "Red wine." },
+    { en: "beer", ipa: "[biə]", zh: "啤酒", lesson: "L48", pos: "n.", example: "Drink beer." },
+    { en: "blackboard", ipa: "['blækbɔ:d]", zh: "黑板", lesson: "L48", pos: "n.", example: "Write on the blackboard." },
+    // Lesson 49
+    { en: "butcher", ipa: "['butʃə]", zh: "卖肉的", lesson: "L49", pos: "n.", example: "Go to the butcher." },
+    { en: "meat", ipa: "[mi:t]", zh: "(食用)肉", lesson: "L49", pos: "n.", example: "Eat meat." },
+    { en: "beef", ipa: "[bi:f]", zh: "牛肉", lesson: "L49", pos: "n.", example: "Roast beef." },
+    { en: "lamb", ipa: "[læm]", zh: "羔羊肉", lesson: "L49", pos: "n.", example: "Lamb chops." },
+    { en: "husband", ipa: "['hʌzbənd]", zh: "丈夫", lesson: "L49", pos: "n.", example: "My husband." },
+    { en: "steak", ipa: "[steik]", zh: "牛排", lesson: "L49", pos: "n.", example: "Steak and chips." },
+    { en: "mince", ipa: "[mins]", zh: "肉馅，绞肉", lesson: "L49", pos: "n.", example: "Mince pie." },
+    { en: "chicken", ipa: "['tʃikin]", zh: "鸡", lesson: "L49", pos: "n.", example: "Roast chicken." },
+    { en: "tell", ipa: "[tel]", zh: "告诉", lesson: "L49", pos: "v.", example: "Tell me." },
+    { en: "truth", ipa: "[tru:θ]", zh: "实情", lesson: "L49", pos: "n.", example: "Tell the truth." },
+    { en: "either", ipa: "['aiðə]", zh: "也(用于否定句)", lesson: "L49", pos: "adv.", example: "I don't like it either." },
+    // Lesson 50
+    { en: "tomato", ipa: "[tə'mɑ:təu]", zh: "西红柿", lesson: "L50", pos: "n.", example: "Tomato soup." },
+    { en: "potato", ipa: "[pə'teitəu]", zh: "土豆", lesson: "L50", pos: "n.", example: "Roast potato." },
+    { en: "cabbage", ipa: "['kæbidʒ]", zh: "卷心菜", lesson: "L50", pos: "n.", example: "Cabbage salad." },
+    { en: "lettuce", ipa: "['letis]", zh: "莴苣", lesson: "L50", pos: "n.", example: "Lettuce leaf." },
+    { en: "pea", ipa: "[pi:]", zh: "豌豆", lesson: "L50", pos: "n.", example: "Pea soup." },
+    { en: "bean", ipa: "[bi:n]", zh: "豆角", lesson: "L50", pos: "n.", example: "Bean sprouts." },
+    { en: "pear", ipa: "[peə]", zh: "梨", lesson: "L50", pos: "n.", example: "A pear." },
+    { en: "grape", ipa: "[greip]", zh: "葡萄", lesson: "L50", pos: "n.", example: "Grapes." },
+    { en: "peach", ipa: "[pi:tʃ]", zh: "桃", lesson: "L50", pos: "n.", example: "A peach." },
+    // Lesson 51
+    { en: "Greece", ipa: "[gri:s]", zh: "希腊", lesson: "L51", pos: "n.", example: "Greece is beautiful." },
+    { en: "climate", ipa: "['klaimit]", zh: "气候", lesson: "L51", pos: "n.", example: "The climate is warm." },
+    { en: "country", ipa: "['kʌntri]", zh: "国家", lesson: "L51", pos: "n.", example: "China is a large country." },
+    { en: "pleasant", ipa: "['plezənt]", zh: "宜人的", lesson: "L51", pos: "adj.", example: "The weather is pleasant." },
+    { en: "weather", ipa: "['weðə]", zh: "天气", lesson: "L51", pos: "n.", example: "What's the weather like?" },
+    { en: "spring", ipa: "[spriŋ]", zh: "春季", lesson: "L51", pos: "n.", example: "Spring is warm." },
+    { en: "windy", ipa: "['windi]", zh: "有风的", lesson: "L51", pos: "adj.", example: "It's windy today." },
+    { en: "warm", ipa: "[wɔ:m]", zh: "温暖的", lesson: "L51", pos: "adj.", example: "It's warm today." },
+    { en: "rain", ipa: "[rein]", zh: "下雨", lesson: "L51", pos: "v.", example: "It's raining." },
+    { en: "sometimes", ipa: "['sʌmtaimz]", zh: "有时", lesson: "L51", pos: "adv.", example: "Sometimes I go to the park." },
+    { en: "summer", ipa: "['sʌmə]", zh: "夏天", lesson: "L51", pos: "n.", example: "Summer is hot." },
+    { en: "autumn", ipa: "['ɔ:təm]", zh: "秋天", lesson: "L51", pos: "n.", example: "Autumn is cool." },
+    { en: "winter", ipa: "['wintə]", zh: "冬天", lesson: "L51", pos: "n.", example: "Winter is cold." },
+    { en: "snow", ipa: "[snəu]", zh: "下雪", lesson: "L51", pos: "v.", example: "It's snowing." },
+    { en: "January", ipa: "['dʒænjuəri]", zh: "1月", lesson: "L51", pos: "n.", example: "January is cold." },
+    { en: "February", ipa: "['februəri]", zh: "2月", lesson: "L51", pos: "n.", example: "February is cold." },
+    { en: "March", ipa: "[mɑ:tʃ]", zh: "3月", lesson: "L51", pos: "n.", example: "March is spring." },
+    { en: "April", ipa: "['eiprəl]", zh: "4月", lesson: "L51", pos: "n.", example: "April is warm." },
+    { en: "May", ipa: "[mei]", zh: "5月", lesson: "L51", pos: "n.", example: "May is beautiful." },
+    { en: "June", ipa: "[dʒu:n]", zh: "6月", lesson: "L51", pos: "n.", example: "June is summer." },
+    { en: "July", ipa: "[dʒu'lai]", zh: "7月", lesson: "L51", pos: "n.", example: "July is hot." },
+    { en: "August", ipa: "['ɔ:gəst]", zh: "8月", lesson: "L51", pos: "n.", example: "August is hot." },
+    { en: "September", ipa: "[sep'tembə]", zh: "9月", lesson: "L51", pos: "n.", example: "September is autumn." },
+    { en: "October", ipa: "[ɔk'təubə]", zh: "10月", lesson: "L51", pos: "n.", example: "October is cool." },
+    { en: "November", ipa: "[nəu'vembə]", zh: "11月", lesson: "L51", pos: "n.", example: "November is cold." },
+    { en: "December", ipa: "[di'sembə]", zh: "12月", lesson: "L51", pos: "n.", example: "December is cold." },
+    // Lesson 52
+    { en: "the U.S.", ipa: "[ðə 'ju:'es]", zh: "美国", lesson: "L52", pos: "n.", example: "The U.S. is a large country." },
+    { en: "Brazil", ipa: "[brə'zil]", zh: "巴西", lesson: "L52", pos: "n.", example: "Brazil is in South America." },
+    { en: "Holland", ipa: "['hɔlənd]", zh: "荷兰", lesson: "L52", pos: "n.", example: "Holland is a small country." },
+    { en: "England", ipa: "['iŋglənd]", zh: "英国", lesson: "L52", pos: "n.", example: "England is in Europe." },
+    { en: "France", ipa: "[fræns]", zh: "法国", lesson: "L52", pos: "n.", example: "France is famous for wine." },
+    { en: "Germany", ipa: "['dʒə:məni]", zh: "德国", lesson: "L52", pos: "n.", example: "Germany is in Europe." },
+    { en: "Italy", ipa: "['itəli]", zh: "意大利", lesson: "L52", pos: "n.", example: "Italy is beautiful." },
+    { en: "Norway", ipa: "['nɔ:wei]", zh: "挪威", lesson: "L52", pos: "n.", example: "Norway is in Scandinavia." },
+    { en: "Russia", ipa: "['rʌʃə]", zh: "俄罗斯", lesson: "L52", pos: "n.", example: "Russia is large." },
+    { en: "Spain", ipa: "[spein]", zh: "西班牙", lesson: "L52", pos: "n.", example: "Spain is in Europe." },
+    { en: "Sweden", ipa: "['swi:dən]", zh: "瑞典", lesson: "L52", pos: "n.", example: "Sweden is in Scandinavia." },
+    // Lesson 53
+    { en: "mild", ipa: "[maild]", zh: "温和的，温暖的", lesson: "L53", pos: "adj.", example: "The weather is mild." },
+    { en: "always", ipa: "['ɔ:lweiz]", zh: "总是", lesson: "L53", pos: "adv.", example: "I always get up early." },
+    { en: "north", ipa: "[nɔ:θ]", zh: "北方", lesson: "L53", pos: "n.", example: "North of the city." },
+    { en: "east", ipa: "[i:st]", zh: "东方", lesson: "L53", pos: "n.", example: "East of the river." },
+    { en: "wet", ipa: "[wet]", zh: "潮湿的", lesson: "L53", pos: "adj.", example: "The ground is wet." },
+    { en: "west", ipa: "[west]", zh: "西方", lesson: "L53", pos: "n.", example: "West of the mountains." },
+    { en: "south", ipa: "[sauθ]", zh: "南方", lesson: "L53", pos: "n.", example: "South of the city." },
+    { en: "season", ipa: "['si:zən]", zh: "季节", lesson: "L53", pos: "n.", example: "Spring is my favourite season." },
+    { en: "best", ipa: "[best]", zh: "最", lesson: "L53", pos: "adv.", example: "I like it best." },
+    { en: "night", ipa: "[nait]", zh: "夜晚", lesson: "L53", pos: "n.", example: "Good night." },
+    { en: "rise", ipa: "[raiz]", zh: "升起", lesson: "L53", pos: "v.", example: "The sun rises in the east." },
+    { en: "early", ipa: "['ə:li]", zh: "早", lesson: "L53", pos: "adv.", example: "Get up early." },
+    { en: "set", ipa: "[set]", zh: "(太阳)落下去", lesson: "L53", pos: "v.", example: "The sun sets in the west." },
+    { en: "late", ipa: "[leit]", zh: "晚，迟", lesson: "L53", pos: "adv.", example: "Don't be late." },
+    { en: "interesting", ipa: "['intristiŋ]", zh: "有趣的，有意思的", lesson: "L53", pos: "adj.", example: "The book is interesting." },
+    { en: "subject", ipa: "['sʌbdʒikt]", zh: "话题", lesson: "L53", pos: "n.", example: "The subject of the conversation." },
+    { en: "conversation", ipa: "[ˌkɔnvə'seiʃən]", zh: "谈话", lesson: "L53", pos: "n.", example: "We had a conversation." },
+    // Lesson 54
+    { en: "Australia", ipa: "[ɔ'streiljə]", zh: "澳大利亚", lesson: "L54", pos: "n.", example: "Australia is a country." },
+    { en: "Australian", ipa: "[ɔ'streiljən]", zh: "澳大利亚人", lesson: "L54", pos: "n.", example: "He is Australian." },
+    { en: "Austria", ipa: "['ɔstriə]", zh: "奥地利", lesson: "L54", pos: "n.", example: "Austria is in Europe." },
+    { en: "Austrian", ipa: "['ɔstriən]", zh: "奥地利人", lesson: "L54", pos: "n.", example: "She is Austrian." },
+    { en: "Canada", ipa: "['kænədə]", zh: "加拿大", lesson: "L54", pos: "n.", example: "Canada is a large country." },
+    { en: "Canadian", ipa: "[kə'neidiən]", zh: "加拿大人", lesson: "L54", pos: "n.", example: "He is Canadian." },
+    { en: "China", ipa: "['tʃainə]", zh: "中国", lesson: "L54", pos: "n.", example: "China is in Asia." },
+    { en: "Finland", ipa: "['finlənd]", zh: "芬兰", lesson: "L54", pos: "n.", example: "Finland is in Scandinavia." },
+    { en: "Finnish", ipa: "['finiʃ]", zh: "芬兰人", lesson: "L54", pos: "n.", example: "She is Finnish." },
+    { en: "India", ipa: "['indiə]", zh: "印度", lesson: "L54", pos: "n.", example: "India is in Asia." },
+    { en: "Indian", ipa: "['indiən]", zh: "印度人", lesson: "L54", pos: "n.", example: "He is Indian." },
+    { en: "Japan", ipa: "[dʒə'pæn]", zh: "日本", lesson: "L54", pos: "n.", example: "Japan is in Asia." },
+    { en: "Nigeria", ipa: "[nai'dʒiəriə]", zh: "尼日利亚", lesson: "L54", pos: "n.", example: "Nigeria is in Africa." },
+    { en: "Nigerian", ipa: "[nai'dʒiəriən]", zh: "尼日利亚人", lesson: "L54", pos: "n.", example: "He is Nigerian." },
+    { en: "Turkey", ipa: "['tə:ki]", zh: "土耳其", lesson: "L54", pos: "n.", example: "Turkey is in Eurasia." },
+    { en: "Turkish", ipa: "['tə:kiʃ]", zh: "土耳其人", lesson: "L54", pos: "n.", example: "She is Turkish." },
+    { en: "Korea", ipa: "[kə'riə]", zh: "韩国", lesson: "L54", pos: "n.", example: "Korea is in Asia." },
+    { en: "Polish", ipa: "['pəuliʃ]", zh: "波兰人", lesson: "L54", pos: "n.", example: "He is Polish." },
+    { en: "Poland", ipa: "['pəulənd]", zh: "波兰", lesson: "L54", pos: "n.", example: "Poland is in Europe." },
+    { en: "Thai", ipa: "[tai]", zh: "泰国人", lesson: "L54", pos: "n.", example: "She is Thai." },
+    { en: "Thailand", ipa: "['tailənd]", zh: "泰国", lesson: "L54", pos: "n.", example: "Thailand is in Asia." },
+    // Lesson 55
+    { en: "live", ipa: "[liv]", zh: "住，生活", lesson: "L55", pos: "v.", example: "I live in London." },
+    { en: "stay", ipa: "[stei]", zh: "呆在，停留", lesson: "L55", pos: "v.", example: "Stay here." },
+    { en: "home", ipa: "[həum]", zh: "家", lesson: "L55", pos: "n.", example: "Go home." },
+    { en: "housework", ipa: "['hauswə:k]", zh: "家务", lesson: "L55", pos: "n.", example: "Do the housework." },
+    { en: "lunch", ipa: "[lʌntʃ]", zh: "午饭", lesson: "L55", pos: "n.", example: "Have lunch." },
+    { en: "afternoon", ipa: "[ˌɑ:ftə'nu:n]", zh: "下午", lesson: "L55", pos: "n.", example: "Good afternoon." },
+    { en: "usually", ipa: "['ju:ʒuəli]", zh: "通常", lesson: "L55", pos: "adv.", example: "I usually get up early." },
+    { en: "together", ipa: "[tə'geðə]", zh: "一起", lesson: "L55", pos: "adv.", example: "We are together." },
+    { en: "evening", ipa: "['i:vniŋ]", zh: "晚上", lesson: "L55", pos: "n.", example: "Good evening." },
+    { en: "arrive", ipa: "[ə'raiv]", zh: "到达", lesson: "L55", pos: "v.", example: "Arrive at school." },
+    // Lesson 57
+    { en: "o'clock", ipa: "[ə'klɔk]", zh: "点钟", lesson: "L57", pos: "adv.", example: "It's 5 o'clock." },
+    { en: "shop", ipa: "[ʃɔp]", zh: "商店", lesson: "L57", pos: "n.", example: "Go to the shop." },
+    { en: "moment", ipa: "['məumənt]", zh: "片刻，瞬间", lesson: "L57", pos: "n.", example: "Just a moment." },
+    // Lesson 59
+    { en: "envelope", ipa: "['envələup]", zh: "信封", lesson: "L59", pos: "n.", example: "Buy an envelope." },
+    { en: "writing paper", ipa: "['raitiŋ 'peipə]", zh: "信纸", lesson: "L59", pos: "n.", example: "Buy writing paper." },
+    { en: "shop assistant", ipa: "[ʃɔp ə'sistənt]", zh: "售货员", lesson: "L59", pos: "n.", example: "Ask the shop assistant." },
+    { en: "size", ipa: "[saiz]", zh: "尺寸，尺码，大小", lesson: "L59", pos: "n.", example: "What size do you want?" },
+    { en: "pad", ipa: "[pæd]", zh: "信笺簿", lesson: "L59", pos: "n.", example: "Write on the pad." },
+    { en: "glue", ipa: "[glu:]", zh: "胶水", lesson: "L59", pos: "n.", example: "Use glue." },
+    { en: "chalk", ipa: "[tʃɔ:k]", zh: "粉笔", lesson: "L59", pos: "n.", example: "Write with chalk." },
+    { en: "change", ipa: "[tʃeindʒ]", zh: "零钱，找给的钱", lesson: "L59", pos: "n.", example: "Keep the change." },
+    // Lesson 61
+    { en: "feel", ipa: "[fi:l]", zh: "感觉", lesson: "L61", pos: "v.", example: "I feel happy." },
+    { en: "look", ipa: "[luk]", zh: "看(起来)", lesson: "L61", pos: "v.", example: "Look at me." },
+    { en: "must", ipa: "[mʌst]", zh: "必须", lesson: "L61", pos: "aux.", example: "You must go." },
+    { en: "call", ipa: "[kɔ:l]", zh: "叫，请", lesson: "L61", pos: "v.", example: "Call the doctor." },
+    { en: "doctor", ipa: "['dɔktə]", zh: "医生", lesson: "L61", pos: "n.", example: "See a doctor." },
+    { en: "telephone", ipa: "['telifəun]", zh: "电话", lesson: "L61", pos: "n.", example: "Answer the telephone." },
+    { en: "remember", ipa: "[ri'membə]", zh: "记得，记住", lesson: "L61", pos: "v.", example: "Remember the name." },
+    { en: "mouth", ipa: "[mauθ]", zh: "嘴", lesson: "L61", pos: "n.", example: "Open your mouth." },
+    { en: "tongue", ipa: "[tʌŋ]", zh: "舌头", lesson: "L61", pos: "n.", example: "Stick out your tongue." },
+    { en: "bad", ipa: "[bæd]", zh: "坏的，严重的", lesson: "L61", pos: "adj.", example: "The weather is bad." },
+    { en: "cold", ipa: "[kəuld]", zh: "感冒", lesson: "L61", pos: "n.", example: "I have a cold." },
+    { en: "news", ipa: "[nju:z]", zh: "消息", lesson: "L61", pos: "n.", example: "Good news!" },
+    { en: "headache", ipa: "['hedeik]", zh: "头痛", lesson: "L61", pos: "n.", example: "I have a headache." },
+    { en: "aspirin", ipa: "['æspərin]", zh: "阿斯匹林", lesson: "L61", pos: "n.", example: "Take an aspirin." },
+    { en: "earache", ipa: "['iəreik]", zh: "耳痛", lesson: "L61", pos: "n.", example: "I have earache." },
+    { en: "toothache", ipa: "['tu:θeik]", zh: "牙痛", lesson: "L61", pos: "n.", example: "I have toothache." },
+    { en: "dentist", ipa: "['dentist]", zh: "牙医", lesson: "L61", pos: "n.", example: "Go to the dentist." },
+    { en: "stomach ache", ipa: "['stʌmək eik]", zh: "胃痛", lesson: "L61", pos: "n.", example: "I have a stomach ache." },
+    { en: "medicine", ipa: "['medsən]", zh: "药", lesson: "L61", pos: "n.", example: "Take medicine." },
+    { en: "temperature", ipa: "['tempərətʃə]", zh: "温度", lesson: "L61", pos: "n.", example: "Take your temperature." },
+    { en: "flu", ipa: "[flu:]", zh: "流行性感冒", lesson: "L61", pos: "n.", example: "I have the flu." },
+    { en: "measles", ipa: "['miːzəlz]", zh: "麻疹", lesson: "L61", pos: "n.", example: "She has measles." },
+    { en: "mumps", ipa: "[mʌmps]", zh: "腮腺炎", lesson: "L61", pos: "n.", example: "He has mumps." },
+    // Lesson 63
+    { en: "better", ipa: "['betə]", zh: "较好的", lesson: "L63", pos: "adj.", example: "I feel better." },
+    { en: "certainly", ipa: "['sə:tənli]", zh: "当然", lesson: "L63", pos: "adv.", example: "Certainly, you can." },
+    { en: "get up", ipa: "[get ʌp]", zh: "起床", lesson: "L63", pos: "v.", example: "Get up early." },
+    { en: "yet", ipa: "[jet]", zh: "还，仍", lesson: "L63", pos: "adv.", example: "Not yet." },
+    { en: "rich", ipa: "[ritʃ]", zh: "油腻的", lesson: "L63", pos: "adj.", example: "Rich food." },
+    { en: "food", ipa: "[fuːd]", zh: "食物", lesson: "L63", pos: "n.", example: "Eat good food." },
+    { en: "remain", ipa: "[ri'mein]", zh: "保持，继续", lesson: "L63", pos: "v.", example: "Remain here." },
+    // Lesson 64
+    { en: "play", ipa: "[plei]", zh: "玩", lesson: "L64", pos: "v.", example: "Play football." },
+    { en: "match", ipa: "[mætʃ]", zh: "火柴", lesson: "L64", pos: "n.", example: "Strike a match." },
+    { en: "talk", ipa: "[tɔːk]", zh: "谈话", lesson: "L64", pos: "v.", example: "Talk to me." },
+    { en: "library", ipa: "['laibrəri]", zh: "图书馆", lesson: "L64", pos: "n.", example: "Go to the library." },
+    { en: "drive", ipa: "[draiv]", zh: "开车", lesson: "L64", pos: "v.", example: "Drive a car." },
+    { en: "so", ipa: "[səu]", zh: "如此地", lesson: "L64", pos: "adv.", example: "It's so hot." },
+    { en: "quickly", ipa: "['kwikli]", zh: "快地", lesson: "L64", pos: "adv.", example: "Run quickly." },
+    { en: "lean out of", ipa: "[li:n aut ɔv]", zh: "身体探出", lesson: "L64", pos: "v.", example: "Lean out of the window." },
+    { en: "break", ipa: "[breik]", zh: "打破", lesson: "L64", pos: "v.", example: "Break the glass." },
+    // Lesson 65
+    { en: "Dad", ipa: "[dæd]", zh: "爸（儿语）", lesson: "L65", pos: "n.", example: "Dad, come here." },
+    { en: "key", ipa: "[kiː]", zh: "钥匙", lesson: "L65", pos: "n.", example: "The key is on the table." },
+    { en: "baby", ipa: "['beibi]", zh: "婴儿", lesson: "L65", pos: "n.", example: "The baby is sleeping." },
+    { en: "hear", ipa: "[hiə]", zh: "听见", lesson: "L65", pos: "v.", example: "I can hear you." },
+    { en: "enjoy", ipa: "[in'dʒɔː]", zh: "玩得快活", lesson: "L65", pos: "v.", example: "Enjoy yourself." },
+    { en: "yourself", ipa: "[jə'self]", zh: "你自己", lesson: "L65", pos: "pron.", example: "Take care of yourself." },
+    { en: "ourselves", ipa: "[auə'selvz]", zh: "我们自己", lesson: "L65", pos: "pron.", example: "We enjoyed ourselves." },
+    // Lesson 66
+    { en: "myself", ipa: "[mai'self]", zh: "我自己", lesson: "L66", pos: "pron.", example: "I did it myself." },
+    { en: "themselves", ipa: "[ðəm'selvz]", zh: "他们自己", lesson: "L66", pos: "pron.", example: "They did it themselves." },
+    { en: "himself", ipa: "[him'self]", zh: "他自己", lesson: "L66", pos: "pron.", example: "He did it himself." },
+    { en: "herself", ipa: "[hə'self]", zh: "她自己", lesson: "L66", pos: "pron.", example: "She did it herself." },
+    // Lesson 67
+    { en: "greengrocer", ipa: "['gri:n,grəusə]", zh: "蔬菜水果零售商", lesson: "L67", pos: "n.", example: "Go to the greengrocer." },
+    { en: "absent", ipa: "['æbsənt]", zh: "缺席的", lesson: "L67", pos: "adj.", example: "He is absent." },
+    { en: "Monday", ipa: "['mʌndi]", zh: "星期一", lesson: "L67", pos: "n.", example: "Monday is the first day." },
+    { en: "Tuesday", ipa: "['tju:zdi]", zh: "星期二", lesson: "L67", pos: "n.", example: "Tuesday is the second day." },
+    { en: "Wednesday", ipa: "['wenzdi]", zh: "星期三", lesson: "L67", pos: "n.", example: "Wednesday is the third day." },
+    { en: "Thursday", ipa: "['θə:zdi]", zh: "星期四", lesson: "L67", pos: "n.", example: "Thursday is the fourth day." },
+    { en: "keep", ipa: "[ki:p]", zh: "(身体健康)处于(状况)", lesson: "L67", pos: "v.", example: "Keep well." },
+    { en: "spend", ipa: "[spend]", zh: "度过", lesson: "L67", pos: "v.", example: "Spend the weekend." },
+    { en: "weekend", ipa: "['wi:kend]", zh: "周末", lesson: "L67", pos: "n.", example: "Have a nice weekend." },
+    { en: "Friday", ipa: "['fraidi]", zh: "星期五", lesson: "L67", pos: "n.", example: "Friday is the fifth day." },
+    { en: "Saturday", ipa: "['sætədi]", zh: "星期六", lesson: "L67", pos: "n.", example: "Saturday is the sixth day." },
+    { en: "Sunday", ipa: "['sʌndi]", zh: "星期日", lesson: "L67", pos: "n.", example: "Sunday is the seventh day." },
+    { en: "country", ipa: "['kʌntri]", zh: "乡村", lesson: "L67", pos: "n.", example: "I like the country." },
+    { en: "lucky", ipa: "['lʌki]", zh: "幸运的", lesson: "L67", pos: "adj.", example: "You are lucky." },
+    // Lesson 68
+    { en: "church", ipa: "[tʃə:tʃ]", zh: "教堂", lesson: "L68", pos: "n.", example: "Go to church." },
+    { en: "dairy", ipa: "['deəri]", zh: "乳品店", lesson: "L68", pos: "n.", example: "Buy milk at the dairy." },
+    { en: "baker", ipa: "['beikə]", zh: "面包师傅", lesson: "L68", pos: "n.", example: "Go to the baker." },
+    { en: "grocer", ipa: "['grəusə]", zh: "食品杂货商", lesson: "L68", pos: "n.", example: "Go to the grocer." },
+    // Lesson 69
+    { en: "year", ipa: "[jiə]", zh: "年", lesson: "L69", pos: "n.", example: "This year." },
+    { en: "race", ipa: "[reis]", zh: "比赛", lesson: "L69", pos: "n.", example: "Win the race." },
+    { en: "town", ipa: "[taun]", zh: "城镇", lesson: "L69", pos: "n.", example: "A small town." },
+    { en: "crowd", ipa: "[kraud]", zh: "人群", lesson: "L69", pos: "n.", example: "A crowd of people." },
+    { en: "stand", ipa: "[stænd]", zh: "站立", lesson: "L69", pos: "v.", example: "Stand up." },
+    { en: "exciting", ipa: "[ik'saitiŋ]", zh: "使人激动的", lesson: "L69", pos: "adj.", example: "An exciting game." },
+    { en: "just", ipa: "[dʒʌst]", zh: "正好，恰好", lesson: "L69", pos: "adv.", example: "Just in time." },
+    { en: "finish", ipa: "['finiʃ]", zh: "结尾，结束", lesson: "L69", pos: "n.", example: "The finish line." },
+    { en: "winner", ipa: "['winə]", zh: "获胜者", lesson: "L69", pos: "n.", example: "The winner is happy." },
+    { en: "behind", ipa: "[bi'haind]", zh: "在…之后", lesson: "L69", pos: "prep.", example: "Behind the house." },
+    { en: "way", ipa: "[wei]", zh: "路途", lesson: "L69", pos: "n.", example: "On the way." },
+    // Lesson 70
+    { en: "uncomfortable", ipa: "[ʌn'kʌmftəbəl]", zh: "不舒服的", lesson: "L70", pos: "adj.", example: "I feel uncomfortable." },
+    { en: "wear", ipa: "[weə]", zh: "穿着", lesson: "L70", pos: "v.", example: "Wear a coat." },
+    // Lesson 71
+    { en: "awful", ipa: "['ɔ:ful]", zh: "让人讨厌的，坏的", lesson: "L71", pos: "adj.", example: "The weather is awful." },
+    { en: "telephone", ipa: "['telifəun]", zh: "打电话", lesson: "L71", pos: "v.", example: "Telephone me." },
+    { en: "time", ipa: "[taim]", zh: "次(数)", lesson: "L71", pos: "n.", example: "Three times." },
+    { en: "answer", ipa: "['ɑ:nsə]", zh: "接(电话)", lesson: "L71", pos: "v.", example: "Answer the phone." },
+    { en: "last", ipa: "[lɑ:st]", zh: "最后的，前一次的", lesson: "L71", pos: "adj.", example: "Last week." },
+    { en: "phone", ipa: "[fəun]", zh: "电话", lesson: "L71", pos: "n.", example: "The phone is ringing." },
+    { en: "again", ipa: "[ə'gein]", zh: "又一次地", lesson: "L71", pos: "adv.", example: "Try again." },
+    { en: "say", ipa: "[sei]", zh: "说", lesson: "L71", pos: "v.", example: "Say hello." },
+    // Lesson 73
+    { en: "week", ipa: "[wi:k]", zh: "周", lesson: "L73", pos: "n.", example: "This week." },
+    { en: "London", ipa: "['lʌndən]", zh: "伦敦", lesson: "L73", pos: "n.", example: "London is the capital." },
+    { en: "suddenly", ipa: "['sʌdənli]", zh: "突然地", lesson: "L73", pos: "adv.", example: "Suddenly, it rained." },
+    { en: "bus stop", ipa: "[bʌs stɔp]", zh: "公共汽车车站", lesson: "L73", pos: "n.", example: "Wait at the bus stop." },
+    { en: "smile", ipa: "[smail]", zh: "微笑", lesson: "L73", pos: "v.", example: "Smile at me." },
+    { en: "pleasantly", ipa: "['plezəntli]", zh: "愉快地", lesson: "L73", pos: "adv.", example: "She smiled pleasantly." },
+    { en: "understand", ipa: "[ˌʌndə'stænd]", zh: "懂，明白", lesson: "L73", pos: "v.", example: "I understand." },
+    { en: "speak", ipa: "[spi:k]", zh: "讲，说", lesson: "L73", pos: "v.", example: "Speak English." },
+    { en: "hand", ipa: "[hænd]", zh: "手", lesson: "L73", pos: "n.", example: "Raise your hand." },
+    { en: "pocket", ipa: "['pɔkit]", zh: "衣袋", lesson: "L73", pos: "n.", example: "In my pocket." },
+    { en: "phrasebook", ipa: "['freizbuk]", zh: "短语手册", lesson: "L73", pos: "n.", example: "Use a phrasebook." },
+    { en: "phrase", ipa: "[freiz]", zh: "短语", lesson: "L73", pos: "n.", example: "A useful phrase." },
+    { en: "slowly", ipa: "['sləuli]", zh: "缓慢地", lesson: "L73", pos: "adv.", example: "Speak slowly." },
+    // Lesson 74
+    { en: "hurriedly", ipa: "['hʌridli]", zh: "匆忙地", lesson: "L74", pos: "adv.", example: "He left hurriedly." },
+    { en: "cut", ipa: "[kʌt]", zh: "割，切", lesson: "L74", pos: "v.", example: "Cut the bread." },
+    { en: "thirstily", ipa: "['θə:stili]", zh: "口渴地", lesson: "L74", pos: "adv.", example: "He drank thirstily." },
+    { en: "go", ipa: "[gəu]", zh: "走", lesson: "L74", pos: "v.", example: "Go away." },
+    { en: "greet", ipa: "[gri:t]", zh: "问候，打招呼", lesson: "L74", pos: "v.", example: "Greet the visitors." },
+    // Lesson 75
+    { en: "ago", ipa: "[ə'gəu]", zh: "以前", lesson: "L75", pos: "adv.", example: "A year ago." },
+    { en: "buy", ipa: "[bai]", zh: "买", lesson: "L75", pos: "v.", example: "Buy a book." },
+    { en: "pair", ipa: "[peə]", zh: "双，对", lesson: "L75", pos: "n.", example: "A pair of shoes." },
+    { en: "fashion", ipa: "['fæʃən]", zh: "（服装的）流行式样", lesson: "L75", pos: "n.", example: "The latest fashion." },
+    // Lesson 77
+    { en: "appointment", ipa: "[ə'pɔintmənt]", zh: "约会，预约", lesson: "L77", pos: "n.", example: "Make an appointment." },
+    { en: "urgent", ipa: "['ə:dʒənt]", zh: "紧急的，急迫的", lesson: "L77", pos: "adj.", example: "An urgent matter." },
+    { en: "till", ipa: "[til]", zh: "直到…为止", lesson: "L77", pos: "prep.", example: "Wait till tomorrow." },
+    // Lesson 79
+    { en: "shopping", ipa: "['ʃɔpiŋ]", zh: "购物", lesson: "L79", pos: "n.", example: "Go shopping." },
+    { en: "list", ipa: "[list]", zh: "单子", lesson: "L79", pos: "n.", example: "Make a list." },
+    { en: "vegetable", ipa: "['vedʒtəbl]", zh: "蔬菜", lesson: "L79", pos: "n.", example: "Eat vegetables." },
+    { en: "need", ipa: "[ni:d]", zh: "需要", lesson: "L79", pos: "v.", example: "I need help." },
+    { en: "hope", ipa: "[həup]", zh: "希望", lesson: "L79", pos: "v.", example: "I hope so." },
+    { en: "thing", ipa: "[θiŋ]", zh: "事情", lesson: "L79", pos: "n.", example: "Many things." },
+    { en: "money", ipa: "['mʌni]", zh: "钱", lesson: "L79", pos: "n.", example: "I have money." },
+    // Lesson 80
+    { en: "groceries", ipa: "['grəusəriz]", zh: "食品杂货", lesson: "L80", pos: "n.", example: "Buy groceries." },
+    { en: "fruit", ipa: "[fru:t]", zh: "水果", lesson: "L80", pos: "n.", example: "Eat fruit." },
+    { en: "stationery", ipa: "['steiʃənəri]", zh: "文具", lesson: "L80", pos: "n.", example: "Buy stationery." },
+    { en: "newsagent", ipa: "['nju:z,eidʒənt]", zh: "报刊零售人", lesson: "L80", pos: "n.", example: "Go to the newsagent." },
+    { en: "chemist", ipa: "['kemist]", zh: "药剂师，化学家", lesson: "L80", pos: "n.", example: "Go to the chemist." },
+    // Lesson 81
+    { en: "bath", ipa: "[bɑ:θ]", zh: "洗澡", lesson: "L81", pos: "n.", example: "Have a bath." },
+    { en: "nearly", ipa: "['niəli]", zh: "几乎，将近", lesson: "L81", pos: "adv.", example: "Nearly finished." },
+    { en: "ready", ipa: "['redi]", zh: "准备好的，完好的", lesson: "L81", pos: "adj.", example: "Ready to go." },
+    { en: "dinner", ipa: "['dinə]", zh: "正餐，晚餐", lesson: "L81", pos: "n.", example: "Have dinner." },
+    { en: "restaurant", ipa: "['restərɔnt]", zh: "饭馆，餐馆", lesson: "L81", pos: "n.", example: "Go to a restaurant." },
+    { en: "roast", ipa: "[rəust]", zh: "烤的", lesson: "L81", pos: "adj.", example: "Roast beef." },
+    // Lesson 82
+    { en: "breakfast", ipa: "['brekfəst]", zh: "早饭", lesson: "L82", pos: "n.", example: "Have breakfast." },
+    { en: "haircut", ipa: "['heəkʌt]", zh: "理发", lesson: "L82", pos: "n.", example: "Get a haircut." },
+    { en: "party", ipa: "['pɑ:ti]", zh: "聚会", lesson: "L82", pos: "n.", example: "Have a party." },
+    { en: "holiday", ipa: "['hɔlədi]", zh: "假日", lesson: "L82", pos: "n.", example: "Go on holiday." },
+    // Lesson 83
+    { en: "mess", ipa: "[mes]", zh: "杂乱，凌乱", lesson: "L83", pos: "n.", example: "The room is a mess." },
+    { en: "pack", ipa: "[pæk]", zh: "包装，打包", lesson: "L83", pos: "v.", example: "Pack your suitcase." },
+    { en: "suitcase", ipa: "['su:tkeis]", zh: "手提箱", lesson: "L83", pos: "n.", example: "Carry a suitcase." },
+    { en: "leave", ipa: "[li:v]", zh: "离开", lesson: "L83", pos: "v.", example: "Leave the room." },
+    { en: "already", ipa: "[ɔ:l'redi]", zh: "已经", lesson: "L83", pos: "adv.", example: "It's already done." },
+    // Lesson 85
+    { en: "Paris", ipa: "['pæris]", zh: "巴黎", lesson: "L85", pos: "n.", example: "Paris is beautiful." },
+    { en: "cinema", ipa: "['sinimə]", zh: "电影院", lesson: "L85", pos: "n.", example: "Go to the cinema." },
+    { en: "film", ipa: "[film]", zh: "电影", lesson: "L85", pos: "n.", example: "Watch a film." },
+    { en: "beautiful", ipa: "['bju:tiful]", zh: "漂亮的", lesson: "L85", pos: "adj.", example: "Beautiful flowers." },
+    { en: "city", ipa: "['siti]", zh: "城市", lesson: "L85", pos: "n.", example: "A big city." },
+    { en: "never", ipa: "['nevə]", zh: "从来没有", lesson: "L85", pos: "adv.", example: "I never forget." },
+    { en: "ever", ipa: "['evə]", zh: "在任何时候", lesson: "L85", pos: "adv.", example: "Have you ever been?" },
+    // Lesson 87
+    { en: "attendant", ipa: "[ə'tendənt]", zh: "接待员", lesson: "L87", pos: "n.", example: "The attendant is helpful." },
+    { en: "bring", ipa: "[briŋ]", zh: "带来，送来", lesson: "L87", pos: "v.", example: "Bring the book." },
+    { en: "garage", ipa: "['gæra:ʒ]", zh: "车库，汽车修理厂", lesson: "L87", pos: "n.", example: "Put the car in the garage." },
+    { en: "crash", ipa: "[kræʃ]", zh: "碰撞", lesson: "L87", pos: "n.", example: "A car crash." },
+    { en: "lamp-post", ipa: "[læmp pəust]", zh: "灯杆", lesson: "L87", pos: "n.", example: "A tall lamp-post." },
+    { en: "repair", ipa: "[ri'peə]", zh: "修理", lesson: "L87", pos: "v.", example: "Repair the car." },
+    { en: "try", ipa: "[trai]", zh: "努力，设法", lesson: "L87", pos: "v.", example: "Try your best." },
+    // Lesson 89
+    { en: "believe", ipa: "[bi'li:v]", zh: "相信，认为", lesson: "L89", pos: "v.", example: "I believe you." },
+    { en: "may", ipa: "[mei]", zh: "可以", lesson: "L89", pos: "aux.", example: "May I come in?" },
+    { en: "how long", ipa: "[hau lɔŋ]", zh: "多长", lesson: "L89", pos: "phrase", example: "How long is it?" },
+    { en: "since", ipa: "[sins]", zh: "自从", lesson: "L89", pos: "prep.", example: "Since Monday." },
+    { en: "why", ipa: "[wai]", zh: "为什么", lesson: "L89", pos: "adv.", example: "Why are you late?" },
+    { en: "sell", ipa: "[sel]", zh: "卖，出售", lesson: "L89", pos: "v.", example: "Sell the car." },
+    { en: "because", ipa: "[bi'kɔz]", zh: "因为", lesson: "L89", pos: "conj.", example: "Because it's raining." },
+    { en: "retire", ipa: "[ri'taiə]", zh: "退休", lesson: "L89", pos: "v.", example: "He retired." },
+    { en: "cost", ipa: "[kɔst]", zh: "花费", lesson: "L89", pos: "v.", example: "It costs a lot." },
+    { en: "pound", ipa: "[paund]", zh: "英镑", lesson: "L89", pos: "n.", example: "It's five pounds." },
+    { en: "worth", ipa: "[wɔ:θ]", zh: "值…钱", lesson: "L89", pos: "prep.", example: "It's worth it." },
+    { en: "penny", ipa: "['peni]", zh: "便士", lesson: "L89", pos: "n.", example: "A penny." },
+    // Lesson 91
+    { en: "still", ipa: "[stil]", zh: "还，仍旧", lesson: "L91", pos: "adv.", example: "I still have it." },
+    { en: "move", ipa: "[mu:v]", zh: "搬家", lesson: "L91", pos: "v.", example: "Move to a new house." },
+    { en: "miss", ipa: "[mis]", zh: "想念，思念", lesson: "L91", pos: "v.", example: "I miss you." },
+    { en: "neighbour", ipa: "['neibə]", zh: "邻居", lesson: "L91", pos: "n.", example: "My neighbour is friendly." },
+    { en: "person", ipa: "['pə:sn]", zh: "人", lesson: "L91", pos: "n.", example: "A nice person." },
+    { en: "people", ipa: "['pi:pl]", zh: "人们", lesson: "L91", pos: "n.", example: "People are friendly." },
+    { en: "poor", ipa: "[puə]", zh: "可怜的", lesson: "L91", pos: "adj.", example: "Poor guy." },
+    // Lesson 93
+    { en: "pilot", ipa: "['pailət]", zh: "飞行员", lesson: "L93", pos: "n.", example: "He is a pilot." },
+    { en: "return", ipa: "[ri'tə:n]", zh: "返回", lesson: "L93", pos: "v.", example: "Return home." },
+    { en: "New York", ipa: "['nju: jɔ:k]", zh: "纽约", lesson: "L93", pos: "n.", example: "New York is a big city." },
+    { en: "Tokyo", ipa: "['təukjəu]", zh: "东京", lesson: "L93", pos: "n.", example: "Tokyo is the capital." },
+    { en: "Madrid", ipa: "[mə'drid]", zh: "马德里", lesson: "L93", pos: "n.", example: "Madrid is in Spain." },
+    { en: "fly", ipa: "[flai]", zh: "飞行", lesson: "L93", pos: "v.", example: "Fly to London." },
+    // Lesson 94
+    { en: "Athens", ipa: "['æθinz]", zh: "雅典", lesson: "L94", pos: "n.", example: "Athens is in Greece." },
+    { en: "Berlin", ipa: "[bə:'lin]", zh: "柏林", lesson: "L94", pos: "n.", example: "Berlin is in Germany." },
+    { en: "Bombay", ipa: "[bɔm'bei]", zh: "孟买", lesson: "L94", pos: "n.", example: "Bombay is in India." },
+    { en: "Geneva", ipa: "[dʒi'ni:və]", zh: "日内瓦", lesson: "L94", pos: "n.", example: "Geneva is in Switzerland." },
+    { en: "Moscow", ipa: "['mɔskəu]", zh: "莫斯科", lesson: "L94", pos: "n.", example: "Moscow is in Russia." },
+    { en: "Rome", ipa: "[raum]", zh: "罗马", lesson: "L94", pos: "n.", example: "Rome is in Italy." },
+    { en: "Seoul", ipa: "[səul]", zh: "汉城", lesson: "L94", pos: "n.", example: "Seoul is in Korea." },
+    { en: "Stockholm", ipa: "['stɔkhoum]", zh: "斯德哥尔摩", lesson: "L94", pos: "n.", example: "Stockholm is in Sweden." },
+    { en: "Sydney", ipa: "['sidni]", zh: "悉尼", lesson: "L94", pos: "n.", example: "Sydney is in Australia." },
+    // Lesson 95
+    { en: "return", ipa: "[ri'tə:n]", zh: "往返", lesson: "L95", pos: "n.", example: "A return ticket." },
+    { en: "train", ipa: "[trein]", zh: "火车", lesson: "L95", pos: "n.", example: "By train." },
+    { en: "platform", ipa: "['plætfɔ:m]", zh: "站台", lesson: "L95", pos: "n.", example: "Platform 3." },
+    { en: "plenty", ipa: "['plenti]", zh: "大量", lesson: "L95", pos: "n.", example: "Plenty of time." },
+    { en: "bar", ipa: "[bɑ:]", zh: "酒吧", lesson: "L95", pos: "n.", example: "Go to a bar." },
+    { en: "station", ipa: "['steiʃən]", zh: "车站，火车站", lesson: "L95", pos: "n.", example: "The train station." },
+    { en: "catch", ipa: "[kætʃ]", zh: "赶上", lesson: "L95", pos: "v.", example: "Catch the train." },
+    // Lesson 96
+    { en: "easy", ipa: "['i:zi]", zh: "容易的", lesson: "L96", pos: "adj.", example: "It's easy." },
+    { en: "enough", ipa: "[i'nʌf]", zh: "足够地", lesson: "L96", pos: "adv.", example: "Enough time." },
+    { en: "paper", ipa: "['peipə]", zh: "考卷", lesson: "L96", pos: "n.", example: "The exam paper." },
+    { en: "fail", ipa: "[feil]", zh: "未及格，失败", lesson: "L96", pos: "v.", example: "Fail the exam." },
+    { en: "answer", ipa: "['ɑ:nsə]", zh: "回答", lesson: "L96", pos: "v.", example: "Answer the question." },
+    { en: "mark", ipa: "[mɑ:k]", zh: "分数", lesson: "L96", pos: "n.", example: "Good marks." },
+    { en: "rest", ipa: "[rest]", zh: "其他的东西", lesson: "L96", pos: "n.", example: "The rest of the day." },
+    { en: "difficult", ipa: "['difikəlt]", zh: "困难的", lesson: "L96", pos: "adj.", example: "It's difficult." },
+    { en: "hate", ipa: "[heit]", zh: "讨厌", lesson: "L96", pos: "v.", example: "I hate it." },
+    { en: "low", ipa: "[ləu]", zh: "低的", lesson: "L96", pos: "adj.", example: "A low price." },
+    { en: "cheer", ipa: "[tʃiə]", zh: "振作，振奋", lesson: "L96", pos: "v.", example: "Cheer up!" },
+    { en: "guy", ipa: "[gai]", zh: "家伙，人", lesson: "L96", pos: "n.", example: "A nice guy." },
+    { en: "top", ipa: "[tɔp]", zh: "上方，顶部", lesson: "L96", pos: "n.", example: "On top." },
+    // Lesson 97
+    { en: "leave", ipa: "[li:v]", zh: "遗留", lesson: "L97", pos: "v.", example: "Leave it here." },
+    { en: "describe", ipa: "[di'skraib]", zh: "描述", lesson: "L97", pos: "v.", example: "Describe the view." },
+    { en: "zip", ipa: "[zip]", zh: "拉链", lesson: "L97", pos: "n.", example: "Zip up your coat." },
+    { en: "label", ipa: "['leibl]", zh: "标签", lesson: "L97", pos: "n.", example: "Read the label." },
+    { en: "handle", ipa: "['hændl]", zh: "提手，把手", lesson: "L97", pos: "n.", example: "The handle is broken." },
+    { en: "address", ipa: "[ə'dres]", zh: "地址", lesson: "L97", pos: "n.", example: "Your address." },
+    { en: "pence", ipa: "[pens]", zh: "penny的复数形式", lesson: "L97", pos: "n.", example: "Ten pence." },
+    { en: "belong", ipa: "[bi'lɔŋ]", zh: "属于", lesson: "L97", pos: "v.", example: "This belongs to me." },
+    // Lesson 99
+    { en: "ow", ipa: "[au]", zh: "哎哟", lesson: "L99", pos: "int.", example: "Ow, that hurts." },
+    { en: "slip", ipa: "[slip]", zh: "滑倒，滑了一脚", lesson: "L99", pos: "v.", example: "He slipped on the ice." },
+    { en: "fall", ipa: "[fɔ:l]", zh: "落下，跌倒", lesson: "L99", pos: "v.", example: "Fall down." },
+    { en: "downstairs", ipa: "[daun'steəz]", zh: "下楼", lesson: "L99", pos: "adv.", example: "Go downstairs." },
+    { en: "hurt", ipa: "[hə:t]", zh: "伤，伤害，疼痛", lesson: "L99", pos: "v.", example: "My leg hurts." },
+    { en: "back", ipa: "[bæk]", zh: "背", lesson: "L99", pos: "n.", example: "My back hurts." },
+    { en: "stand up", ipa: "[stænd ʌp]", zh: "起立，站起来", lesson: "L99", pos: "v.", example: "Stand up." },
+    { en: "help", ipa: "[help]", zh: "帮助", lesson: "L99", pos: "v.", example: "Help me." },
+    { en: "at once", ipa: "[æt wʌns]", zh: "立即", lesson: "L99", pos: "phrase", example: "Come here at once." },
+    { en: "sure", ipa: "[ʃuə]", zh: "一定的，确信的", lesson: "L99", pos: "adj.", example: "I'm sure." },
+    { en: "X-ray", ipa: "['eksrei]", zh: "X光透视", lesson: "L99", pos: "n.", example: "Take an X-ray." },
+    // Lesson 101
+    { en: "Scotland", ipa: "['skɔtlənd]", zh: "苏格兰", lesson: "L101", pos: "n.", example: "Scotland is beautiful." },
+    { en: "card", ipa: "[kɑ:d]", zh: "明信片", lesson: "L101", pos: "n.", example: "Send a card." },
+    { en: "youth", ipa: "[ju:θ]", zh: "青年", lesson: "L101", pos: "n.", example: "Youth is wonderful." },
+    { en: "hostel", ipa: "['hɔstəl]", zh: "招待所，旅馆", lesson: "L101", pos: "n.", example: "Stay at a hostel." },
+    { en: "association", ipa: "[ə,səusi'eiʃən]", zh: "协会", lesson: "L101", pos: "n.", example: "A youth association." },
+    { en: "soon", ipa: "[su:n]", zh: "不久", lesson: "L101", pos: "adv.", example: "See you soon." },
+    { en: "write", ipa: "[rait]", zh: "写", lesson: "L101", pos: "v.", example: "Write a letter." },
+    // Lesson 103
+    { en: "exam", ipa: "[ig'zæm]", zh: "考试", lesson: "L103", pos: "n.", example: "Have an exam." },
+    { en: "pass", ipa: "[pɑ:s]", zh: "及格，通过", lesson: "L103", pos: "v.", example: "Pass the exam." },
+    { en: "mathematics", ipa: "[mæθə'mætiks]", zh: "数学", lesson: "L103", pos: "n.", example: "I like mathematics." },
+    { en: "question", ipa: "['kwestʃən]", zh: "问题", lesson: "L103", pos: "n.", example: "Ask a question." },
+    // Lesson 104
+    { en: "clever", ipa: "['klevə]", zh: "聪明的", lesson: "L104", pos: "adj.", example: "He is clever." },
+    { en: "stupid", ipa: "['stju:pid]", zh: "笨的", lesson: "L104", pos: "adj.", example: "That's stupid." },
+    { en: "cheap", ipa: "[tʃi:p]", zh: "便宜的", lesson: "L104", pos: "adj.", example: "It's cheap." },
+    { en: "expensive", ipa: "[ik'spensiv]", zh: "贵的", lesson: "L104", pos: "adj.", example: "It's expensive." },
+    { en: "fresh", ipa: "[freʃ]", zh: "新鲜的", lesson: "L104", pos: "adj.", example: "Fresh bread." },
+    { en: "stale", ipa: "[steil]", zh: "变傻的", lesson: "L104", pos: "adj.", example: "Stale bread." },
+    { en: "low", ipa: "[ləu]", zh: "低的，矮的", lesson: "L104", pos: "adj.", example: "A low table." },
+    { en: "loud", ipa: "[laud]", zh: "大声的", lesson: "L104", pos: "adj.", example: "Loud music." },
+    { en: "high", ipa: "[hai]", zh: "高的", lesson: "L104", pos: "adj.", example: "A high mountain." },
+    { en: "hard", ipa: "['hɑ:d]", zh: "硬的", lesson: "L104", pos: "adj.", example: "Hard wood." },
+    { en: "sweet", ipa: "[swi:t]", zh: "甜的", lesson: "L104", pos: "adj.", example: "Sweet fruit." },
+    { en: "soft", ipa: "[sɔft]", zh: "软的", lesson: "L104", pos: "adj.", example: "Soft grass." },
+    { en: "sour", ipa: "[sauə]", zh: "酸的", lesson: "L104", pos: "adj.", example: "Sour milk." },
+    // Lesson 105
+    { en: "spell", ipa: "[spel]", zh: "拼写", lesson: "L105", pos: "v.", example: "Spell your name." },
+    { en: "intelligent", ipa: "[in'telidʒənt]", zh: "聪明的，有智慧的", lesson: "L105", pos: "adj.", example: "She is intelligent." },
+    { en: "mistake", ipa: "[mis'teik]", zh: "错误", lesson: "L105", pos: "n.", example: "Make a mistake." },
+    { en: "present", ipa: "[pri'zent]", zh: "礼物", lesson: "L105", pos: "n.", example: "A birthday present." },
+    { en: "dictionary", ipa: "['dikʃənəri]", zh: "词典", lesson: "L105", pos: "n.", example: "Use a dictionary." },
+    // Lesson 106
+    { en: "carry", ipa: "['kæri]", zh: "携带", lesson: "L106", pos: "v.", example: "Carry the bag." },
+    { en: "correct", ipa: "[kə'rekt]", zh: "改正，纠正", lesson: "L106", pos: "v.", example: "Correct the mistake." },
+    // Lesson 107
+    { en: "madam", ipa: "['mædəm]", zh: "夫人，女士", lesson: "L107", pos: "n.", example: "Good morning, madam." },
+    { en: "as well", ipa: "[æz wel]", zh: "同样", lesson: "L107", pos: "phrase", example: "I like it as well." },
+    { en: "suit", ipa: "[su:t]", zh: "适于", lesson: "L107", pos: "v.", example: "This suit suits you." },
+    { en: "pretty", ipa: "['priti]", zh: "漂亮的", lesson: "L107", pos: "adj.", example: "She is pretty." },
+    // Lesson 109
+    { en: "idea", ipa: "[ai'diə]", zh: "主意", lesson: "L109", pos: "n.", example: "Good idea." },
+    { en: "a little", ipa: "[ə 'litl]", zh: "少许", lesson: "L109", pos: "phrase", example: "A little water." },
+    { en: "teaspoonful", ipa: "['ti:spu:nful]", zh: "一满茶匙", lesson: "L109", pos: "n.", example: "A teaspoonful of sugar." },
+    { en: "less", ipa: "[les]", zh: "较少的，更小的", lesson: "L109", pos: "adj.", example: "Less sugar." },
+    { en: "a few", ipa: "[ə fju:]", zh: "几个", lesson: "L109", pos: "phrase", example: "A few apples." },
+    { en: "pity", ipa: "['piti]", zh: "遗憾", lesson: "L109", pos: "n.", example: "What a pity!" },
+    { en: "instead", ipa: "[in'sted]", zh: "代替", lesson: "L109", pos: "adv.", example: "I'll go instead." },
+    { en: "advice", ipa: "[əd'vais]", zh: "建议，忠告", lesson: "L109", pos: "n.", example: "Good advice." },
+    // Lesson 110
+    { en: "most", ipa: "[məust]", zh: "最多的", lesson: "L110", pos: "adj.", example: "Most people." },
+    { en: "least", ipa: "[li:st]", zh: "最小的，最少的", lesson: "L110", pos: "adj.", example: "The least amount." },
+    { en: "best", ipa: "[best]", zh: "最好的", lesson: "L110", pos: "adj.", example: "The best choice." },
+    { en: "worse", ipa: "[wə:s]", zh: "更坏的", lesson: "L110", pos: "adj.", example: "This is worse." },
+    { en: "worst", ipa: "[wə:st]", zh: "最坏的", lesson: "L110", pos: "adj.", example: "The worst day." },
+    // Lesson 111
+    { en: "model", ipa: "['mɔdl]", zh: "型号，式样", lesson: "L111", pos: "n.", example: "The latest model." },
+    { en: "afford", ipa: "[ə'fɔ:d]", zh: "付得起（钱）", lesson: "L111", pos: "v.", example: "I can afford it." },
+    { en: "deposit", ipa: "[di'pɔzit]", zh: "预付定金", lesson: "L111", pos: "n.", example: "Pay a deposit." },
+    { en: "instalment", ipa: "[in'stɔ:lmənt]", zh: "分期付款", lesson: "L111", pos: "n.", example: "Pay by instalments." },
+    { en: "price", ipa: "[prais]", zh: "价格", lesson: "L111", pos: "n.", example: "The price is good." },
+    { en: "millionaire", ipa: "[miljə'neə]", zh: "百万富翁", lesson: "L111", pos: "n.", example: "He is a millionaire." },
+    // Lesson 113
+    { en: "conductor", ipa: "[kən'dʌktə]", zh: "售票员", lesson: "L113", pos: "n.", example: "The conductor is nice." },
+    { en: "fare", ipa: "[feə]", zh: "车费，车票", lesson: "L113", pos: "n.", example: "The fare is cheap." },
+    { en: "change", ipa: "[tʃeindʒ]", zh: "兑换（钱）", lesson: "L113", pos: "v.", example: "Change money." },
+    { en: "note", ipa: "[nəut]", zh: "纸币", lesson: "L113", pos: "n.", example: "A ten-pound note." },
+    { en: "passenger", ipa: "['pæsindʒə]", zh: "乘客", lesson: "L113", pos: "n.", example: "The passenger is waiting." },
+    { en: "none", ipa: "[nʌn]", zh: "没有任何东西", lesson: "L113", pos: "pron.", example: "None of them." },
+    { en: "neither", ipa: "['naiðə]", zh: "也不", lesson: "L113", pos: "adv.", example: "Neither do I." },
+    { en: "get off", ipa: "[get ɔf]", zh: "下车", lesson: "L113", pos: "v.", example: "Get off the bus." },
+    { en: "tramp", ipa: "[træmp]", zh: "流浪汉", lesson: "L113", pos: "n.", example: "A tramp is sleeping." },
+    { en: "except", ipa: "[ik'sept]", zh: "除…外", lesson: "L113", pos: "prep.", example: "Everyone except me." },
+    // Lesson 115
+    { en: "anyone", ipa: "['eniwʌn]", zh: "任何人", lesson: "L115", pos: "pron.", example: "Is anyone there?" },
+    { en: "knock", ipa: "[nɔk]", zh: "敲，打", lesson: "L115", pos: "v.", example: "Knock on the door." },
+    { en: "everything", ipa: "['evriθiŋ]", zh: "一切事物", lesson: "L115", pos: "pron.", example: "Everything is fine." },
+    { en: "quiet", ipa: "['kwaiət]", zh: "宁静的，安静的", lesson: "L115", pos: "adj.", example: "Be quiet." },
+    { en: "impossible", ipa: "[im'pɔsəbl]", zh: "不可能的", lesson: "L115", pos: "adj.", example: "It's impossible." },
+    { en: "invite", ipa: "[in'vait]", zh: "邀请", lesson: "L115", pos: "v.", example: "Invite me." },
+    { en: "anything", ipa: "['eniθiŋ]", zh: "任何东西", lesson: "L115", pos: "pron.", example: "Anything else?" },
+    { en: "nothing", ipa: "['nʌθiŋ]", zh: "什么也没有", lesson: "L115", pos: "pron.", example: "Nothing is wrong." },
+    { en: "lemonade", ipa: "['lemə'neid]", zh: "柠檬水", lesson: "L115", pos: "n.", example: "A glass of lemonade." },
+    { en: "joke", ipa: "[dʒəuk]", zh: "开玩笑", lesson: "L115", pos: "v.", example: "Don't joke." },
+    // Lesson 116
+    { en: "asleep", ipa: "[ə'sli:p]", zh: "睡觉，睡着", lesson: "L116", pos: "adj.", example: "He is asleep." },
+    { en: "glasses", ipa: "['glɑ:si:z]", zh: "眼镜", lesson: "L116", pos: "n.", example: "Where are my glasses?" },
+    // Lesson 117
+    { en: "dining room", ipa: "['dainiŋ ru:m]", zh: "饭厅", lesson: "L117", pos: "n.", example: "The dining room is big." },
+    { en: "coin", ipa: "[kɔin]", zh: "硬币", lesson: "L117", pos: "n.", example: "A coin." },
+    { en: "mouth", ipa: "[mauθ]", zh: "嘴", lesson: "L117", pos: "n.", example: "Open your mouth." },
+    { en: "swallow", ipa: "['swɔləu]", zh: "吞下", lesson: "L117", pos: "v.", example: "Swallow the pill." },
+    { en: "later", ipa: "['leitə]", zh: "后来", lesson: "L117", pos: "adv.", example: "See you later." },
+    { en: "toilet", ipa: "['tɔilit]", zh: "厕所，盥洗室", lesson: "L117", pos: "n.", example: "Go to the toilet." },
+    // Lesson 118
+    { en: "ring", ipa: "[riŋ]", zh: "响", lesson: "L118", pos: "v.", example: "The phone is ringing." },
+    // Lesson 119
+    { en: "story", ipa: "['stɔ:ri]", zh: "故事", lesson: "L119", pos: "n.", example: "Tell a story." },
+    { en: "happen", ipa: "['hæpən]", zh: "发生", lesson: "L119", pos: "v.", example: "What happened?" },
+    { en: "thief", ipa: "[θi:f]", zh: "贼", lesson: "L119", pos: "n.", example: "Catch the thief." },
+    { en: "enter", ipa: "['entə]", zh: "进入", lesson: "L119", pos: "v.", example: "Enter the room." },
+    { en: "dark", ipa: "[dɑ:k]", zh: "黑暗的", lesson: "L119", pos: "adj.", example: "It's dark." },
+    { en: "torch", ipa: "[tɔ:tʃ]", zh: "手电筒", lesson: "L119", pos: "n.", example: "Turn on the torch." },
+    { en: "voice", ipa: "[vɔis]", zh: "(说话的)声音", lesson: "L119", pos: "n.", example: "I hear a voice." },
+    { en: "parrot", ipa: "['pærət]", zh: "鹦鹉", lesson: "L119", pos: "n.", example: "The parrot can talk." },
+    // Lesson 120
+    { en: "exercise book", ipa: "['eksəsaiz buk]", zh: "练习本", lesson: "L120", pos: "n.", example: "Write in your exercise book." },
+    // Lesson 121
+    { en: "customer", ipa: "['kʌstəmə]", zh: "顾客", lesson: "L121", pos: "n.", example: "The customer is happy." },
+    { en: "forget", ipa: "[fə'get]", zh: "忘记", lesson: "L121", pos: "v.", example: "Don't forget." },
+    { en: "manager", ipa: "['mænidʒə]", zh: "经理", lesson: "L121", pos: "n.", example: "The manager is busy." },
+    { en: "serve", ipa: "[sə:v]", zh: "照应，服务，接待", lesson: "L121", pos: "v.", example: "Serve the food." },
+    { en: "counter", ipa: "['kauntə]", zh: "柜台", lesson: "L121", pos: "n.", example: "At the counter." },
+    { en: "recognize", ipa: "['rekəgnaiz]", zh: "认识", lesson: "L121", pos: "v.", example: "I recognize you." },
+    // Lesson 122
+    { en: "road", ipa: "[rəud]", zh: "路", lesson: "L122", pos: "n.", example: "The road is long." },
+    // Lesson 123
+    { en: "during", ipa: "['djuəriŋ]", zh: "在……期间", lesson: "L123", pos: "prep.", example: "During the summer." },
+    { en: "trip", ipa: "[trip]", zh: "旅行", lesson: "L123", pos: "n.", example: "A trip to London." },
+    { en: "travel", ipa: "['trævəl]", zh: "旅行", lesson: "L123", pos: "v.", example: "Travel abroad." },
+    { en: "offer", ipa: "['ɔfə]", zh: "提供", lesson: "L123", pos: "v.", example: "Offer help." },
+    { en: "job", ipa: "[dʒɔb]", zh: "工作", lesson: "L123", pos: "n.", example: "Get a job." },
+    { en: "guess", ipa: "[ges]", zh: "猜", lesson: "L123", pos: "v.", example: "Guess the answer." },
+    { en: "grow", ipa: "[grəu]", zh: "长，让生长", lesson: "L123", pos: "v.", example: "Grow flowers." },
+    { en: "beard", ipa: "[biəd]", zh: "(下巴上的)胡子", lesson: "L123", pos: "n.", example: "He has a beard." },
+    // Lesson 124
+    { en: "kitten", ipa: "['kitn]", zh: "小猫", lesson: "L124", pos: "n.", example: "A cute kitten." },
+    // Lesson 125
+    { en: "water", ipa: "['wɔ:tə]", zh: "浇水", lesson: "L125", pos: "v.", example: "Water the plants." },
+    { en: "terribly", ipa: "['terəbli]", zh: "非常", lesson: "L125", pos: "adv.", example: "It's terribly cold." },
+    { en: "dry", ipa: "[drai]", zh: "干燥的，干的", lesson: "L125", pos: "adj.", example: "The ground is dry." },
+    { en: "nuisance", ipa: "['nju:səns]", zh: "讨厌的东西或人", lesson: "L125", pos: "n.", example: "What a nuisance!" },
+    { en: "mean", ipa: "[mi:n]", zh: "意味着，意思是", lesson: "L125", pos: "v.", example: "What does it mean?" },
+    { en: "surprise", ipa: "[sə'praiz]", zh: "惊奇，意外的事", lesson: "L125", pos: "n.", example: "A big surprise." },
+    // Lesson 126
+    { en: "immediately", ipa: "[i'mi:diətli]", zh: "立即地", lesson: "L126", pos: "adv.", example: "Come immediately." },
+    // Lesson 127
+    { en: "famous", ipa: "['feiməs]", zh: "著名的", lesson: "L127", pos: "adj.", example: "A famous actor." },
+    { en: "actress", ipa: "['æktris]", zh: "女演员", lesson: "L127", pos: "n.", example: "She is an actress." },
+    { en: "at least", ipa: "[æt li:st]", zh: "至少", lesson: "L127", pos: "phrase", example: "At least 10." },
+    { en: "actor", ipa: "['æktə]", zh: "男演员", lesson: "L127", pos: "n.", example: "He is an actor." },
+    { en: "read", ipa: "[ri:d]", zh: "通过阅读得知", lesson: "L127", pos: "v.", example: "I read about it." },
+    // Lesson 129
+    { en: "wave", ipa: "[weiv]", zh: "招手", lesson: "L129", pos: "v.", example: "Wave goodbye." },
+    { en: "track", ipa: "[træk]", zh: "跑道", lesson: "L129", pos: "n.", example: "A running track." },
+    { en: "mile", ipa: "[mail]", zh: "英里", lesson: "L129", pos: "n.", example: "A mile away." },
+    { en: "overtake", ipa: "['əuvəteik]", zh: "从后面超越", lesson: "L129", pos: "v.", example: "Overtake the car." },
+    { en: "speed", ipa: "[spi:d]", zh: "限速", lesson: "L129", pos: "n.", example: "Speed limit." },
+    { en: "dream", ipa: "[dri:m]", zh: "做梦", lesson: "L129", pos: "v.", example: "I had a dream." },
+    { en: "sign", ipa: "[sain]", zh: "标记，牌子", lesson: "L129", pos: "n.", example: "Traffic sign." },
+    { en: "driving licence", ipa: "['draiviŋ 'laisəns]", zh: "驾驶执照", lesson: "L129", pos: "n.", example: "Show your driving licence." },
+    { en: "charge", ipa: "[tʃɑ:dʒ]", zh: "罚款", lesson: "L129", pos: "v.", example: "They charged him." },
+    { en: "darling", ipa: "['dɑ:liŋ]", zh: "亲爱的", lesson: "L129", pos: "n.", example: "Hello, darling." },
+    // Lesson 131
+    { en: "Egypt", ipa: "['i:dʒipt]", zh: "埃及", lesson: "L131", pos: "n.", example: "Egypt is in Africa." },
+    { en: "abroad", ipa: "[ə'brɔ:d]", zh: "国外", lesson: "L131", pos: "adv.", example: "Go abroad." },
+    { en: "worry", ipa: "['wəri]", zh: "担忧", lesson: "L131", pos: "v.", example: "Don't worry." },
+    // Lesson 133
+    { en: "reporter", ipa: "[ri'pɔ:tə]", zh: "记者", lesson: "L133", pos: "n.", example: "The reporter asked." },
+    { en: "sensational", ipa: "[sen'seiʃənəl]", zh: "爆炸性的，耸人听闻的", lesson: "L133", pos: "adj.", example: "Sensational news." },
+    { en: "mink coat", ipa: "[miŋk kəut]", zh: "貂皮大衣", lesson: "L133", pos: "n.", example: "A mink coat is expensive." },
+    // Lesson 135
+    { en: "future", ipa: "['fju:tʃə]", zh: "未来的", lesson: "L135", pos: "n.", example: "In the future." },
+    { en: "get married", ipa: "[get 'mærid]", zh: "结婚", lesson: "L135", pos: "v.", example: "They got married." },
+    { en: "hotel", ipa: "[həu'tel]", zh: "饭店", lesson: "L135", pos: "n.", example: "Stay at a hotel." },
+    { en: "latest", ipa: "['leitist]", zh: "最新的", lesson: "L135", pos: "adj.", example: "The latest news." },
+    { en: "introduce", ipa: "['intrə'dju:s]", zh: "介绍", lesson: "L135", pos: "v.", example: "Introduce me." },
+    // Lesson 137
+    { en: "football", ipa: "['futbɔ:l]", zh: "足球", lesson: "L137", pos: "n.", example: "Play football." },
+    { en: "pool", ipa: "[pu:l]", zh: "赌注", lesson: "L137", pos: "n.", example: "A football pool." },
+    { en: "win", ipa: "[win]", zh: "赢", lesson: "L137", pos: "v.", example: "Win the game." },
+    { en: "world", ipa: "[wə:ld]", zh: "世界", lesson: "L137", pos: "n.", example: "The world is big." },
+    { en: "poor", ipa: "[puə]", zh: "贫穷的", lesson: "L137", pos: "adj.", example: "He is poor." },
+    { en: "depend", ipa: "[di'pend]", zh: "依靠", lesson: "L137", pos: "v.", example: "It depends." },
+    // Lesson 139
+    { en: "extra", ipa: "['ekstrə]", zh: "额外的", lesson: "L139", pos: "adj.", example: "Extra time." },
+    { en: "engineer", ipa: "[endʒi'niə]", zh: "工程师", lesson: "L139", pos: "n.", example: "He is an engineer." },
+    { en: "overseas", ipa: "['əuvə'si:z]", zh: "海外的，国外的", lesson: "L139", pos: "adj.", example: "Overseas students." },
+    { en: "engineering", ipa: "[endʒi'niəriŋ]", zh: "工程", lesson: "L139", pos: "n.", example: "He studies engineering." },
+    { en: "company", ipa: "['kʌmpəni]", zh: "公司", lesson: "L139", pos: "n.", example: "A big company." },
+    { en: "line", ipa: "[lain]", zh: "线路", lesson: "L139", pos: "n.", example: "The telephone line." },
+    // Lesson 141
+    { en: "excited", ipa: "[ik'saitid]", zh: "兴奋的", lesson: "L141", pos: "adj.", example: "I'm excited." },
+    { en: "get on", ipa: "[get ɔn]", zh: "登上", lesson: "L141", pos: "v.", example: "Get on the bus." },
+    { en: "middle-aged", ipa: "['midl'eidʒid]", zh: "中年的", lesson: "L141", pos: "adj.", example: "A middle-aged man." },
+    { en: "opposite", ipa: "['ɔpəzit]", zh: "在...对面", lesson: "L141", pos: "prep.", example: "Opposite the station." },
+    { en: "curiously", ipa: "['kjuəriəsli]", zh: "好奇地", lesson: "L141", pos: "adv.", example: "She looked curiously." },
+    { en: "funny", ipa: "['fʌni]", zh: "可笑的，滑稽的", lesson: "L141", pos: "adj.", example: "A funny story." },
+    { en: "powder", ipa: "['paudə]", zh: "香粉", lesson: "L141", pos: "n.", example: "Face powder." },
+    { en: "compact", ipa: "['kɔmpækt]", zh: "带镜的化妆盒", lesson: "L141", pos: "n.", example: "A compact mirror." },
+    { en: "kindly", ipa: "['kaindli]", zh: "和蔼地", lesson: "L141", pos: "adv.", example: "She spoke kindly." },
+    { en: "ugly", ipa: "['ʌgli]", zh: "丑陋的", lesson: "L141", pos: "adj.", example: "An ugly building." },
+    { en: "amused", ipa: "[ə'mju:zd]", zh: "有趣的", lesson: "L141", pos: "adj.", example: "I was amused." },
+    { en: "smile", ipa: "[smail]", zh: "微笑", lesson: "L141", pos: "v.", example: "Smile at me." },
+    { en: "embarrassed", ipa: "[im'bærəst]", zh: "尴尬的，窘迫的", lesson: "L141", pos: "adj.", example: "I feel embarrassed." },
+    // Lesson 142
+    { en: "worried", ipa: "['wərid]", zh: "担心，担忧", lesson: "L142", pos: "adj.", example: "I am worried." },
+    { en: "regularly", ipa: "['regjuləli]", zh: "经常地，定期地", lesson: "L142", pos: "adv.", example: "Exercise regularly." },
+    // Lesson 143
+    { en: "surround", ipa: "[sə'raund]", zh: "包围", lesson: "L143", pos: "v.", example: "Surround the house." },
+    { en: "wood", ipa: "[wud]", zh: "树林", lesson: "L143", pos: "n.", example: "A walk in the wood." },
+    { en: "beauty spot", ipa: "['bju:ti spɔt]", zh: "风景点", lesson: "L143", pos: "n.", example: "A famous beauty spot." },
+    { en: "hundred", ipa: "['hʌndrəd]", zh: "百", lesson: "L143", pos: "n.", example: "A hundred years." },
+    { en: "city", ipa: "['siti]", zh: "城市", lesson: "L143", pos: "n.", example: "A big city." },
+    { en: "through", ipa: "[θru:]", zh: "穿过", lesson: "L143", pos: "prep.", example: "Walk through the wood." },
+    { en: "visitor", ipa: "['vizitə]", zh: "参观者，游客", lesson: "L143", pos: "n.", example: "Visitors to the park." },
+    { en: "tidy", ipa: "['taidi]", zh: "整齐的", lesson: "L143", pos: "adj.", example: "A tidy room." },
+    { en: "litter", ipa: "['litə]", zh: "杂乱的东西", lesson: "L143", pos: "n.", example: "Don't drop litter." },
+    { en: "litter basket", ipa: "['litə 'bɑ:skit]", zh: "废物筐", lesson: "L143", pos: "n.", example: "Put it in the litter basket." },
+    { en: "place", ipa: "[pleis]", zh: "放", lesson: "L143", pos: "v.", example: "Place it here." },
+    { en: "throw", ipa: "[θrəu]", zh: "扔，抛", lesson: "L143", pos: "v.", example: "Throw it away." },
+    { en: "rubbish", ipa: "['rʌbiʃ]", zh: "垃圾", lesson: "L143", pos: "n.", example: "Throw away rubbish." },
+    { en: "count", ipa: "[kaunt]", zh: "数，点", lesson: "L143", pos: "v.", example: "Count the money." },
+    { en: "cover", ipa: "['kʌvə]", zh: "覆盖", lesson: "L143", pos: "v.", example: "Cover the table." },
+    { en: "piece", ipa: "[pi:s]", zh: "碎片", lesson: "L143", pos: "n.", example: "A piece of paper." },
+    { en: "tyre", ipa: "['taiə]", zh: "轮胎", lesson: "L143", pos: "n.", example: "A flat tyre." },
+    { en: "rusty", ipa: "['rʌsti]", zh: "生锈的", lesson: "L143", pos: "adj.", example: "A rusty nail." },
+    { en: "among", ipa: "[ə'mʌŋ]", zh: "在...之间", lesson: "L143", pos: "prep.", example: "Among the trees." },
+    { en: "prosecute", ipa: "['prɔsikju:t]", zh: "依法处置", lesson: "L143", pos: "v.", example: "They prosecuted him." }
+];
+
+// ======================== 间隔重复核心 ========================
+const STORAGE_KEY = 'nce_spaced_repetition_v1';
+const INTERVALS = {
+    WRONG: 25 * 60 * 1000,
+    CORRECT_1: 24 * 60 * 60 * 1000,
+    CORRECT_2: 3 * 24 * 60 * 60 * 1000,
+    CORRECT_3: 7 * 24 * 60 * 60 * 1000
+};
+
+function now() { return Date.now(); }
+
+function loadProgress() {
+    try { const data = localStorage.getItem(STORAGE_KEY); return data ? JSON.parse(data) : {}; } catch { return {}; }
+}
+function saveProgress(p) { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); }
+
+function getWordState(word) {
+    const progress = loadProgress();
+    return progress[word] || { correctCount: 0, lastSeen: 0, nextReview: 0, mastered: false, totalCorrect: 0, totalWrong: 0 };
+}
+
+function updateWordState(word, isCorrect) {
+    const progress = loadProgress();
+    if (!progress[word]) progress[word] = { correctCount: 0, lastSeen: 0, nextReview: 0, mastered: false, totalCorrect: 0, totalWrong: 0 };
+    const state = progress[word];
+    const currentTime = now();
+    if (isCorrect) {
+        state.totalCorrect++;
+        state.correctCount++;
+        if (state.correctCount >= 4) {
+            state.mastered = true;
+            state.nextReview = Infinity;
+        } else {
+            let delay;
+            if (state.correctCount === 1) delay = INTERVALS.CORRECT_1;
+            else if (state.correctCount === 2) delay = INTERVALS.CORRECT_2;
+            else if (state.correctCount === 3) delay = INTERVALS.CORRECT_3;
+            else delay = INTERVALS.CORRECT_1;
+            state.nextReview = currentTime + delay;
+        }
+    } else {
+        state.totalWrong++;
+        state.correctCount = 0;
+        state.nextReview = currentTime + INTERVALS.WRONG;
+        state.mastered = false;
+    }
+    state.lastSeen = currentTime;
+    saveProgress(progress);
+    return state;
+}
+
+function getDueWords(allWords) {
+    const progress = loadProgress();
+    const currentTime = now();
+    const due = [], learning = [], mastered = [];
+    allWords.forEach(w => {
+        const state = progress[w.en] || { correctCount: 0, lastSeen: 0, nextReview: 0, mastered: false };
+        if (state.mastered) mastered.push(w.en);
+        else if (state.nextReview <= currentTime) due.push(w.en);
+        else learning.push(w.en);
+    });
+    return { due, learning, mastered };
+}
+
+// ======================== UI 核心 ========================
+let currentMode = 'card';
+let wordListData = RAW_WORDS;
+let currentIndex = 0;
+let shuffled = [];
+let stats = { correct: 0, wrong: 0, total: 0 };
+let answered = false;
+let currentItem = null;
+let voiceReady = false;
+const voiceStatusEl = document.getElementById('voiceStatus');
+
+function updateVoiceStatus(ready) {
+    voiceReady = ready;
+    if (ready) {
+        voiceStatusEl.style.display = 'none';
+    } else {
+        voiceStatusEl.style.display = 'inline-block';
+        voiceStatusEl.textContent = '🔊 正在加载语音引擎...';
+        voiceStatusEl.className = 'voice-status loading';
+    }
+}
+
+// 强制激活语音：在用户首次点击时尝试加载语音并播放一个空音频以激活
+function forceActivateSpeech() {
+    if (voiceReady) return;
+    if (!window.speechSynthesis) return;
+    try {
+        // 获取语音列表
+        const voices = speechSynthesis.getVoices();
+        if (voices && voices.length > 0) {
+            updateVoiceStatus(true);
+            return;
+        }
+        // 如果还是没有语音，尝试播放一个极短的静音来激活
+        const utterance = new SpeechSynthesisUtterance(' ');
+        utterance.lang = 'en-US';
+        utterance.volume = 0;
+        speechSynthesis.speak(utterance);
+        setTimeout(() => {
+            const v = speechSynthesis.getVoices();
+            if (v && v.length > 0) updateVoiceStatus(true);
+        }, 200);
+    } catch (e) {
+        console.warn('语音激活失败:', e);
+    }
+}
+
+function initSpeech() {
+    if (!window.speechSynthesis) {
+        voiceStatusEl.style.display = 'none';
+        return;
+    }
+    const tryLoadVoices = () => {
+        const voices = speechSynthesis.getVoices();
+        if (voices && voices.length > 0) { updateVoiceStatus(true); return true; }
+        return false;
+    };
+    if (tryLoadVoices()) return;
+    speechSynthesis.onvoiceschanged = function() {
+        if (tryLoadVoices()) speechSynthesis.onvoiceschanged = null;
+    };
+    // 延时重试
+    setTimeout(() => {
+        const voices = speechSynthesis.getVoices();
+        if (voices && voices.length > 0) updateVoiceStatus(true);
+        else {
+            voiceReady = false;
+            voiceStatusEl.style.display = 'inline-block';
+            voiceStatusEl.textContent = '🔊 请点击任意位置激活语音';
+            voiceStatusEl.className = 'voice-status loading';
+            // 点击页面任意位置尝试激活
+            document.addEventListener('click', function initOnClick() {
+                forceActivateSpeech();
+                if (voiceReady) {
+                    document.removeEventListener('click', initOnClick);
+                }
+            }, { once: false });
+        }
+    }, 3000);
+}
+
+const allWords = RAW_WORDS;
+
+function loadWords() {
+    const { due, learning, mastered } = getDueWords(allWords);
+    let activeWords = [...due, ...learning];
+    if (activeWords.length === 0) {
+        activeWords = allWords.filter(w => {
+            const state = loadProgress()[w.en];
+            return !state || !state.mastered;
+        }).map(w => w.en);
+    }
+    if (activeWords.length === 0) {
+        shuffled = [];
+        stats = { correct: 0, wrong: 0, total: 0 };
+        currentIndex = 0; answered = false;
+        render(); updateStat(); renderWordList(); updateProgressBar();
+        return;
+    }
+    const progress = loadProgress();
+    activeWords.sort((a, b) => {
+        const sa = progress[a] || { nextReview: 0, mastered: false };
+        const sb = progress[b] || { nextReview: 0, mastered: false };
+        const aDue = sa.nextReview <= now();
+        const bDue = sb.nextReview <= now();
+        if (aDue && !bDue) return -1;
+        if (!aDue && bDue) return 1;
+        return (sa.nextReview || 0) - (sb.nextReview || 0);
+    });
+    const wordDataMap = {};
+    allWords.forEach(w => { wordDataMap[w.en] = w; });
+    shuffled = activeWords.map(en => wordDataMap[en]).filter(w => w);
+    stats = { correct: 0, wrong: 0, total: 0 };
+    currentIndex = 0; answered = false;
+    render(); updateStat(); renderWordList(); updateProgressBar();
+}
+
+function getCurrentItem() {
+    if (shuffled.length === 0) return null;
+    return shuffled[currentIndex % shuffled.length];
+}
+
+function handleAnswer(item, isCorrect) {
+    if (answered) return;
+    answered = true;
+    stats.total++;
+    if (isCorrect) stats.correct++; else stats.wrong++;
+    updateWordState(item.en, isCorrect);
+    const oldStats = { ...stats };
+    loadWords();
+    stats = oldStats;
+    render(); updateStat(); renderWordList(); updateProgressBar();
+    if (shuffled.length > 0) {
+        const found = shuffled.some(w => w.en === item.en);
+        if (!found) currentIndex = 0;
+        else {
+            const newIndex = shuffled.findIndex(w => w.en === item.en);
+            if (newIndex >= 0) currentIndex = newIndex;
+        }
+        render();
+    }
+}
+
+// ======================== 语音 ========================
+function speak(text) {
+    if (!text) return;
+    // 如果语音未就绪，尝试激活
+    if (!voiceReady) {
+        forceActivateSpeech();
+        // 如果还是没有就绪，提示用户点击
+        if (!voiceReady) {
+            voiceStatusEl.style.display = 'inline-block';
+            voiceStatusEl.textContent = '⚠️ 请点击页面任意位置激活语音';
+            voiceStatusEl.className = 'voice-status loading';
+            return;
+        }
+    }
+    try {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.85;
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+        const voices = window.speechSynthesis.getVoices();
+        const male = voices.filter(v => v.lang.startsWith('en') && /male/i.test(v.name));
+        if (male.length > 0) utterance.voice = male[0];
+        else {
+            const enVoice = voices.find(v => v.lang.startsWith('en'));
+            if (enVoice) utterance.voice = enVoice;
+        }
+        window.speechSynthesis.speak(utterance);
+    } catch (e) { console.warn('语音播放失败:', e); }
+}
+
+function speakCardWord() {
+    const item = getCurrentItem();
+    if (item) speak(item.en);
+}
+
+function speakCardExample() {
+    const item = getCurrentItem();
+    if (item && item.example) speak(item.example);
+    else if (item) speak(item.en);
+}
+
+function speakCurrentWord() {
+    const item = getCurrentItem();
+    if (item) speak(item.en);
+}
+
+// ======================== 渲染 ========================
+function render() {
+    const container = document.getElementById('cardContent');
+    const extra = document.getElementById('extraArea');
+    extra.innerHTML = '';
+    const item = getCurrentItem();
+    currentItem = item;
+    if (!item) {
+        container.innerHTML = `<div style="color:#6f7d98;">🎉 所有单词已掌握！</div>`;
+        return;
+    }
+    const state = getWordState(item.en);
+    let statusMsg = '';
+    if (state.mastered) statusMsg = '✅ 已掌握';
+    else if (state.correctCount > 0) {
+        const intervals = ['', '1天', '3天', '7天'];
+        const next = state.correctCount < 4 ? intervals[state.correctCount] || '' : '';
+        statusMsg = `📈 连续答对 ${state.correctCount} 次 · 下次复习 ${next}`;
+    }
+    const mode = currentMode;
+    let html = '';
+    const lessonBadge = `<span class="lesson-badge">${item.lesson}</span>`;
+    
+    if (mode === 'card') {
+        html = `<div>${lessonBadge}</div>`;
+        html += `<div class="word-big">${item.en}</div>`;
+        if (item.ipa) html += `<div class="word-ipa">${item.ipa}</div>`;
+        const posDisplay = item.pos ? `<span class="pos-badge">${item.pos}</span>` : '';
+        html += `<div class="word-zh" style="font-size:1.8rem; margin-top:4px;">${item.zh} ${posDisplay}</div>`;
+        if (item.example) {
+            html += `<div class="example-box"><div class="example-en">💬 ${item.example}</div></div>`;
+        }
+        if (statusMsg) html += `<div style="font-size:0.85rem; color:#6f7d98; margin-top:6px;">${statusMsg}</div>`;
+        html += `<div class="audio-pair" style="margin-top:10px;">
+            <button class="audio-btn word" onclick="speakCardWord()">🔊 词汇发音</button>
+            ${item.example ? `<button class="audio-btn example" onclick="speakCardExample()">📖 例句发音</button>` : ''}
+        </div>`;
+        html += `<div style="font-size:0.8rem; color:#9aa8b9; margin-top:8px;">💡 点击「下一题」浏览下一个单词</div>`;
+        container.innerHTML = html;
+        return;
+    }
+    
+    if (mode === 'en2zh') {
+        html = `<div>${lessonBadge}</div><div class="word-big">${item.en}</div>${item.ipa ? `<div class="word-ipa">${item.ipa}</div>` : ''}`;
+        if (statusMsg) html += `<div class="hint">${statusMsg}</div>`;
+        html += `<div class="hint">选择正确的中文释义</div>`;
+        const opts = generateOptions(item, 'zh');
+        html += `<div class="options">${opts.map(o => `<button class="opt-btn" data-word="${o.en}" data-zh="${o.zh}">${o.zh}</button>`).join('')}</div>`;
+        container.innerHTML = html;
+        attachOptionListeners(item, 'zh');
+    } else if (mode === 'zh2en') {
+        html = `<div>${lessonBadge}</div><div class="word-zh">${item.zh}</div>`;
+        if (statusMsg) html += `<div class="hint">${statusMsg}</div>`;
+        html += `<div class="hint">输入对应的英文</div>`;
+        if (item.ipa) html += `<div class="small-ipa" style="margin:4px 0;">💡 音标: ${item.ipa}</div>`;
+        html += `<div class="input-area"><input type="text" id="answerInput" placeholder="输入英文..." autocomplete="off"><button id="submitAnswer">确认</button></div>`;
+        container.innerHTML = html;
+        document.getElementById('submitAnswer').addEventListener('click', () => checkZh2En(item));
+        document.getElementById('answerInput').addEventListener('keyup', (e) => { if (e.key === 'Enter') checkZh2En(item); });
+    } else if (mode === 'listen') {
+        html = `<div>${lessonBadge}</div><div class="word-big">🎧 听音拼写</div>`;
+        if (statusMsg) html += `<div class="hint">${statusMsg}</div>`;
+        html += `<div class="hint">点击下方播放音频，然后拼写单词</div>`;
+        html += `<div class="audio-group"><button class="audio-btn word" onclick="speakCurrentWord()">🔊 播放单词</button></div>`;
+        if (item.ipa) html += `<div class="small-ipa" style="margin:6px 0;">🔊 音标: ${item.ipa}</div>`;
+        html += `<div class="input-area"><input type="text" id="listenInput" placeholder="拼写英文..." autocomplete="off"><button id="submitListen">确认</button></div>`;
+        container.innerHTML = html;
+        document.getElementById('submitListen').addEventListener('click', () => checkListen(item));
+        document.getElementById('listenInput').addEventListener('keyup', (e) => { if (e.key === 'Enter') checkListen(item); });
+    } else if (mode === 'audio2word') {
+        html = `<div>${lessonBadge}</div><div class="word-big">🔊 听音选词</div>`;
+        if (statusMsg) html += `<div class="hint">${statusMsg}</div>`;
+        html += `<div class="hint">点击播放，然后选择正确的单词</div>`;
+        html += `<div class="audio-group"><button class="audio-btn word" onclick="speakCurrentWord()">🔊 播放单词</button></div>`;
+        const opts = generateOptions(item, 'en');
+        html += `<div class="options">${opts.map(o => `<button class="opt-btn" data-word="${o.en}" data-zh="${o.zh}">${o.en}</button>`).join('')}</div>`;
+        container.innerHTML = html;
+        attachOptionListeners(item, 'en');
+    }
+}
+
+function generateOptions(item, type) {
+    let pool = shuffled.filter(w => w.en !== item.en);
+    pool = shuffleArray(pool).slice(0, 3);
+    let options = [item, ...pool];
+    if (type === 'zh') options = shuffleArray(options.map(w => ({ en: w.en, zh: w.zh })));
+    else options = shuffleArray(options.map(w => ({ en: w.en, zh: w.zh })));
+    return options;
+}
+
+function shuffleArray(arr) { for (let i = arr.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
+
+function attachOptionListeners(item, type) {
+    document.querySelectorAll('.opt-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            if (answered) return;
+            const selected = type === 'zh' ? this.dataset.zh : this.dataset.word;
+            const correct = type === 'zh' ? item.zh : item.en;
+            const isCorrect = selected === correct;
+            this.classList.add(isCorrect ? 'correct' : 'wrong');
+            if (!isCorrect) {
+                document.querySelectorAll('.opt-btn').forEach(b => {
+                    const val = type === 'zh' ? b.dataset.zh : b.dataset.word;
+                    if (val === correct) b.classList.add('correct');
+                });
+            }
+            handleAnswer(item, isCorrect);
+        });
+    });
+}
+
+function checkZh2En(item) {
+    if (answered) return;
+    const input = document.getElementById('answerInput');
+    const val = input.value.trim().toLowerCase();
+    const correct = item.en.toLowerCase();
+    const isCorrect = val === correct;
+    document.getElementById('extraArea').innerHTML = `<div style="font-size:1.2rem; margin-top:8px;">${isCorrect ? '✅ 正确！' : '❌ 错误，正确答案: ' + item.en}</div>`;
+    handleAnswer(item, isCorrect);
+}
+
+function checkListen(item) {
+    if (answered) return;
+    const input = document.getElementById('listenInput');
+    const val = input.value.trim().toLowerCase();
+    const correct = item.en.toLowerCase();
+    const isCorrect = val === correct;
+    document.getElementById('extraArea').innerHTML = `<div style="font-size:1.2rem; margin-top:8px;">${isCorrect ? '✅ 拼写正确！' : '❌ 错误，正确拼写: ' + item.en}</div>`;
+    handleAnswer(item, isCorrect);
+}
+
+function nextQuestion() {
+    if (shuffled.length === 0) return;
+    if (currentMode === 'card') {
+        currentIndex = (currentIndex + 1) % shuffled.length;
+        answered = false;
+        render();
+        document.getElementById('extraArea').innerHTML = '';
+        return;
+    }
+    loadWords();
+    if (currentIndex >= shuffled.length) currentIndex = 0;
+    answered = false;
+    render();
+    document.getElementById('extraArea').innerHTML = '';
+    updateStat();
+}
+
+function updateStat() {
+    document.getElementById('correctNum').textContent = stats.correct;
+    document.getElementById('wrongNum').textContent = stats.wrong;
+    const total = stats.total || 1;
+    document.getElementById('rateNum').textContent = Math.round((stats.correct / total) * 100) + '%';
+    const remain = shuffled.length - (stats.correct + stats.wrong);
+    document.getElementById('remainNum').textContent = remain > 0 ? remain : 0;
+}
+
+function updateProgressBar() {
+    const progress = loadProgress();
+    let mastered = 0, learning = 0, unlearned = 0;
+    const currentTime = now();
+    allWords.forEach(w => {
+        const p = progress[w.en];
+        if (p && p.mastered) mastered++;
+        else if (p && p.nextReview > currentTime) learning++;
+        else unlearned++;
+    });
+    document.getElementById('masteredCount').textContent = mastered;
+    document.getElementById('learningCount').textContent = learning;
+    document.getElementById('unlearnedCount').textContent = unlearned;
+    document.getElementById('saveStatus').textContent = '💾 已自动保存';
+}
+
+function renderWordList() {
+    const table = document.getElementById('wordlistTable');
+    const progress = loadProgress();
+    const currentTime = now();
+    let html = `<table>`;
+    allWords.forEach(w => {
+        const p = progress[w.en] || { mastered: false, correctCount: 0, nextReview: 0 };
+        let dot, color, label;
+        if (p.mastered) { dot = '●'; color = '#1a6b3a'; label = '已掌握'; }
+        else if (p.nextReview <= currentTime) { dot = '●'; color = '#e68a2e'; label = '待复习'; }
+        else { dot = '○'; color = '#c0c8d6'; label = '学习中'; }
+        const lessonTag = `<span class="lesson-tag">${w.lesson}</span>`;
+        const intervalLabel = p.correctCount > 0 && !p.mastered ? ` (${p.correctCount}/4)` : '';
+        html += `<tr><td class="en">${w.en}</td><td class="ipa">${w.ipa || ''}</td><td class="zh">${lessonTag}${w.zh}</td><td style="text-align:center;color:${color};font-size:0.8rem;">${dot} ${label}${intervalLabel}</td></tr>`;
+    });
+    html += `</table>`;
+    table.innerHTML = html;
+}
+
+// ======================== 初始化 ========================
+function initModeTabs() {
+    document.querySelectorAll('.mode-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            currentMode = this.dataset.mode;
+            answered = false;
+            if (currentMode !== 'card') {
+                loadWords();
+            }
+            render();
+            document.getElementById('extraArea').innerHTML = '';
+        });
+    });
+    document.querySelector('.mode-tab[data-mode="card"]')?.classList.add('active');
+}
+
+document.getElementById('nextBtn').addEventListener('click', nextQuestion);
+document.getElementById('shuffleBtn').addEventListener('click', function() {
+    if (shuffled.length > 0) {
+        shuffled = shuffleArray([...shuffled]);
+        currentIndex = 0;
+        stats = { correct: 0, wrong: 0, total: 0 };
+        answered = false;
+        render();
+        updateStat();
+    }
+});
+document.getElementById('resetAllBtn').addEventListener('click', function() {
+    if (!confirm('⚠️ 确定要删除所有学习进度吗？此操作不可撤销！')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    loadWords();
+});
+
+initSpeech();
+loadWords();
+initModeTabs();
+
+// 全局点击激活语音
+document.addEventListener('click', function() {
+    forceActivateSpeech();
+});
+</script>
+</body>
+</html>
